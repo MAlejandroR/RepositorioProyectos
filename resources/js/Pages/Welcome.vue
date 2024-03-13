@@ -1,5 +1,8 @@
 <script setup>
 import {Head, Link} from '@inertiajs/vue3';
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 defineProps({
     canLogin: Boolean,
@@ -7,52 +10,49 @@ defineProps({
 
 });
 </script>
-
 <template>
     <Head title="Proyectos"/>
-    <div class="flex flex-row sm:flex-row h-screen w-screen
-    ">
-        <div class="w-2/3
-        flex justify-center  center p-10 rounded rounded-2xl
-        bg-hero-pattern bg-cover bg-no-repeat bg-center h-screen">
-            <div class="backdrop-brightness-50 h-1/6 p-5 rounded rounded-2xl bg-black/30">
-                <h1 class="text-6xl font-bold bg-clip-text
-                text-transparent bg-gradient-to-r
-                from-start via-middle to-end">
-                    Repositorio de Proyectos
+    <div class="flex flex-row sm:flex-row h-screen w-screen">
+        <div class="w-2/3 flex justify-center items-center p-10 rounded rounded-2xl bg-hero-pattern bg-cover bg-no-repeat bg-center h-screen">
+            <div class="backdrop-brightness-50 p-5 rounded rounded-2xl bg-black/30">
+                <h1 class="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-start via-middle to-end">
+                    __(Repositorio de Proyectos)
                 </h1>
             </div>
-
         </div>
-        <div class="w-1/3 h-screen bg-white rounded-3xl ">
-            <div class="flex  flex-col justify-center p-10">
+        <div class="w-1/3 h-screen flex flex-col justify-start
+         items-center bg-white rounded-3xl p-5">
+            <div class="mb-10">
                 <img src="/images/logo.png" alt="logo Enlaces">
-                <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <form class="card-body">
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Email</span>
-                            </label>
-                            <input type="email" placeholder="email" class="input input-bordered" required />
-                        </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Password</span>
-                            </label>
-                            <input type="password" placeholder="password" class="input input-bordered" required />
-                            <label class="label">
-                                <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
-                        </div>
-                        <div class="form-control mt-6">
-                            <button class="btn btn-primary">Login</button>
-                        </div>
-                    </form>
-                </div>
-
             </div>
+<div class=" flex justify-center items-center h-full">
+            <div class="shadow-2xl h-4/6 bg-white p-10 rounded-lg">
+                <form>
+                    <div class="form-control">
+                        <InputLabel class="label">
+                            <span class="label-text">Email</span>
+                        </InputLabel>
+                        <TextInput type="email" placeholder="email" class="input input-bordered" required />
+                    </div>
+                    <div class="form-control">
+                        <InputLabel class="label">
+                            <span class="label-text">Password</span>
+                        </InputLabel>
+                        <TextInput type="password" placeholder="password" class="input input-bordered" required />
+                        <InputLabel class="label">
+                            <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                        </InputLabel>
+                    </div>
+                    <div class="form-control mt-6">
+                        <PrimaryButton class="btn btn-primary">Login</PrimaryButton>
+                    </div>
+                </form>
+            </div>
+</div>
         </div>
     </div>
+
+
 
     <!--    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">-->
     <!--        <div v-if="canLogin" class="sm:fixed sm:top-0 sm:end-0 p-6 text-end z-10">-->
@@ -167,6 +167,7 @@ defineProps({
 .bg-dots-darker {
     background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
 }
+
 
 @media (prefers-color-scheme: dark) {
     .dark\:bg-dots-lighter {
