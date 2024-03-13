@@ -3,7 +3,9 @@
 Un fichero de requisitos está en (./documenacion/requisitos.docs)
 
 # Uso de Librerías
-Instala el paquete del cliente de Google: Puedes incluir este paquete en tu proyecto Laravel mediante Composer. Ejecuta el siguiente comando en tu terminal:
+Instala el paquete del cliente de Google: 
+Puedes incluir este paquete en tu proyecto Laravel mediante Composer. 
+Ejecuta el siguiente comando en tu terminal:
 
 ``` bash
 
@@ -21,3 +23,15 @@ Debes crear un proyecto en Google Cloud, habilitar la API de Google Drive para e
 
 * Integración con Inertia:
  La lógica para interactuar con Google Drive estará en el lado del servidor de Laravel. Puedes exponer esta funcionalidad a tu frontend Vue.js mediante controladores Laravel, que devuelven datos o vistas que Inertia puede manejar. Desde el frontend, puedes realizar solicitudes a estos controladores para acceder o modificar tus archivos en Google Drive.
+
+
+## Atribuciones
+*Imagen de fondo
+>Imagen de <a href="https://www.freepik.es/foto-gratis/papeles-comerciales-naturaleza-muerta-varias-piezas-mecanismo_24749607.htm#query=gestion%20proyectos&position=1&from_view=keyword&track=ais&uuid=7979d323-213f-4ebc-acdd-9a17cab7c51c">Freepik</a>
+
+
+# Programas usados
+* ***pick*** para capturar colores
+```bash
+sudo snap install pick-colour-picker --classic
+```
