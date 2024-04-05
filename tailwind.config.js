@@ -17,8 +17,23 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors:{
+                "header":"rgb(231, 117, 30)"
+            },
+            height:{
+              "10v": "10vh"
+            },
+            backgroundImage: {
+                'hero-pattern': "url('/images/background_main.jpg')",
+            },
+            gradientColorStops: theme => ({
+                ...theme('colors'),
+                'end': '#ffffff', // Blanco
+                'start': 'rgb(231, 117, 30)', // Nuestro naranja personalizado
+                // 'end': '#ffffff', // Blanco
+            }),
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [forms, typography, require("daisyui")],
 };

@@ -1,66 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplicación de Repositorios de proyectos
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Un fichero de requisitos está en (./documenacion/requisitos.docs)
 
-## About Laravel
+# Uso de Librerías
+Instala el paquete del cliente de Google: 
+Puedes incluir este paquete en tu proyecto Laravel mediante Composer. 
+Ejecuta el siguiente comando en tu terminal:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+``` bash
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+composer require google/apiclient
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Configura las credenciales de Google API:
+Debes crear un proyecto en Google Cloud, habilitar la API de Google Drive para ese proyecto, y generar credenciales (normalmente un archivo JSON) que tu aplicación Laravel utilizará para autenticarse con Google. Este proceso se realiza en la consola de Google Cloud.
 
-## Learning Laravel
+* Implementa la autenticación:
+ Utiliza las credenciales obtenidas para autenticar tu aplicación con Google. Esto generalmente implica cargar el archivo de credenciales JSON en tu aplicación y utilizarlo para crear un cliente autorizado con el SDK de Google.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* Accede a Google Drive:
+* Una vez autenticado, puedes usar el cliente de Google para realizar operaciones en Google Drive, como listar archivos, subir nuevos archivos, o descargar archivos existentes. El cliente te permite interactuar con Drive a través de una serie de métodos disponibles en el SDK.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* Integración con Inertia:
+ La lógica para interactuar con Google Drive estará en el lado del servidor de Laravel. Puedes exponer esta funcionalidad a tu frontend Vue.js mediante controladores Laravel, que devuelven datos o vistas que Inertia puede manejar. Desde el frontend, puedes realizar solicitudes a estos controladores para acceder o modificar tus archivos en Google Drive.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Atribuciones
+*Imagen de fondo
+>Imagen de <a href="https://www.freepik.es/foto-gratis/papeles-comerciales-naturaleza-muerta-varias-piezas-mecanismo_24749607.htm#query=gestion%20proyectos&position=1&from_view=keyword&track=ais&uuid=7979d323-213f-4ebc-acdd-9a17cab7c51c">Freepik</a>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+# Programas usados
+* ***pick*** para capturar colores
+```bash
+sudo snap install pick-colour-picker --classic
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+## Traducciones
+```bash
+composer require --dev laravel-lang/common
+```
+Me dio un problema y es que faltaba una librería de php
+```bash
+sudo apt-get install php8.3-bcmath 
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+*La configuración por defecto del idioma en ***.env*** 
+```json
+APP_LOCALE=en
+APP_FALLBACK_LOCALE=en
+APP_FAKER_LOCALE=en_US
+```
+*Generamos la carpeta lang
+```php
 
-## Security Vulnerabilities
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Pendiente (1/04/2024)
+Estoy con el cambio de idiomas a través del componente Dropdown
+## [Idiomas](./Documentacion/idiomas.md)    
+
+
+
+1. -Subir a git con CI/CA
+1. -Desplegar el web.infenlaces.com
+1. - Tema de autenticación 
+1. - Roles: **Admin, alumno, profesor**

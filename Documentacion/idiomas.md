@@ -1,0 +1,1 @@
+## idiomas:Creamos un componentes para seleccoinar el idioma:()[]UFfff!!! solucionado el problema  era es que cuando leo tengo que parsearlo a jsonPendiente de documentar y hacer un pequeño post de cómo realizarlo.* Pinia Genial!!!!!!* axios vs Inertia.get ???? (es realmente ajax ??????)* El pareado* Concretar bien pinia cómo fucionan los almacenes.
