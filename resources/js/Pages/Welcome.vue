@@ -4,6 +4,10 @@ import Login from "@/Pages/Auth/Login.vue";
 import { defineProps  } from "vue";
 import DropDownLang from "@/Components/DropDown-lang.vue";
 import {__} from "@/Hooks/useTranslation.js";
+import RegisterModal from "@/Pages/Auth/RegisterModal.vue";
+import {ref} from "vue";
+
+const showModal=ref(false)
 
 
 
@@ -19,6 +23,7 @@ console.log ("Listado de lenguajes "+datos.list_of_lang)
 
 </script>
 <template>
+    <RegisterModal :visible="showModal" @update:visible="showModal = $event" />
     <Head title="Proyectos"/>
     <div class="flex flex-row sm:flex-row h-screen w-screen">
         <div class="w-2/3 flex justify-center items-center p-10 rounded rounded-2xl
@@ -46,7 +51,7 @@ console.log ("Listado de lenguajes "+datos.list_of_lang)
 
 
                 <div class="shadow-2xl h-4/6 bg-white p-10 rounded-lg">
-                    <Login />
+                    <Login :showModal="showModal"/>
 
 
                 </div>
