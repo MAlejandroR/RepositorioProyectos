@@ -4,7 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', fn()=>"hola");
+Route::get('/1', fn()=> Inertia::render("W1"));
 Route::get('/', \App\Http\Controllers\MainController::class);
 
 Route::middleware([
