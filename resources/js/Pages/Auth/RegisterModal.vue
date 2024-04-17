@@ -1,5 +1,5 @@
 <template>
-    <div v-if="visible" class="modal">
+    <div v-if="visible" class="my-modal">
         <div class="modal-box">
             <h2 class="font-bold">{{ __("Register") }}</h2>
             <form @submit.prevent="register">
@@ -56,7 +56,17 @@ function close() {
 </script>
 
 <style scoped>
-.modal {
+.my-modal {
     /* Estilos del modal */
+    position: fixed; /* or absolute */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
 }
 </style>

@@ -16,7 +16,10 @@ const datos = defineProps({
 console.log ("Listado de lenguajes "+datos.list_of_lang)
 
 console.log (`Wellcome.vue l-17 showmodal ${showModal.value}`)
-
+function updateShowModal(newValue){
+    console.log(`En Welcome update show modal a ${newValue}`)
+    showModal.value=newValue;
+}
 </script>
 <template>
     <RegisterModal :visible="showModal" @update:visible="showModal = $event" />
@@ -48,7 +51,7 @@ console.log (`Wellcome.vue l-17 showmodal ${showModal.value}`)
 
 
                 <div class="shadow-2xl h-4/6 bg-white p-10 rounded-lg">
-                    <Login :showModal="showModal"/>
+                    <Login :showModal="showModal" @update:showModal="updateShowModal"/>
                 </div>
             </div>
         </div>
