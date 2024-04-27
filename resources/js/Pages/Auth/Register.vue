@@ -8,9 +8,14 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 
+
+const props =defineProps({
+    departamento: Array
+})
 const form = useForm({
     name: '',
     email: '',
+    departamento: ''
     password: '',
     password_confirmation: '',
     terms: false,
@@ -85,6 +90,20 @@ const submit = () => {
                 />
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
+            <div class="mt-4">
+                Departamento
+                <InputLabel for="departamento" value="Departamento" />
+                <TextInput
+                    id="departamento"
+                    v-model="form.departamento"
+                    type="select"
+                    class="mt-1 block w-full"
+                    required
+                >
+                    <TextInput type="options" v-model="form.departamento" />
+                </TextInput>
+                <InputError class="mt-2" :message="form.errors.departament" />
+            </div>
 
             <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
                 <InputLabel for="terms">
@@ -98,6 +117,7 @@ const submit = () => {
                     <InputError class="mt-2" :message="form.errors.terms" />
                 </InputLabel>
             </div>
+
 
             <div class="flex items-center justify-end mt-4">
                 <Link :href="route('login')" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">

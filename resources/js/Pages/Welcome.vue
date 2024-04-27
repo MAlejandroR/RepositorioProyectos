@@ -12,18 +12,20 @@ const showModal=ref(false);
 const datos = defineProps({
     translate: Object,
     list_of_lang: Object,
+    departaments: Array
 });
-console.log ("Listado de lenguajes "+datos.list_of_lang)
+console.log ("Departamentos  "+datos.departaments);
 
-console.log (`Wellcome.vue l-17 showmodal ${showModal.value}`)
+console.log ("Listado de lenguajes "+datos.list_of_lang);
+
+console.log (`Wellcome.vue l-17 showmodal ${showModal.value}`);
 function updateShowModal(newValue){
     console.log(`En Welcome update show modal a ${newValue}`)
     showModal.value=newValue;
 }
 </script>
 <template>
-    <RegisterModal :visible="showModal" @update:visible="showModal = $event" />
-
+    <RegisterModal :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />
     <Head title="Proyectos"/>
     <div class="flex flex-row sm:flex-row h-screen w-screen">
         <div class="w-2/3 flex justify-center items-center p-10 rounded rounded-2xl
