@@ -14,6 +14,8 @@ class MainController extends Controller
     public function __invoke(){
 //        session()->flush();
         $list_of_lang = config("language");
+        $departaments = config("departaments");
+        info ($departaments);
 
 
 
@@ -22,7 +24,8 @@ class MainController extends Controller
 //            'canRegister' => Route::has('register'),
 //            'laravelVersion' => Application::VERSION,
 //            'phpVersion' => PHP_VERSION,
-            'list_of_lang'=>$list_of_lang
+            'list_of_lang'=>$list_of_lang,
+            'departaments'=>$departaments
         ]);
     }
 }
