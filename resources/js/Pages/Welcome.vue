@@ -3,9 +3,9 @@ import {Head} from '@inertiajs/vue3';
 import Login from "@/Pages/Auth/Login.vue";
 import { defineProps  } from "vue";
 import DropDownLang from "@/Components/DropDown-lang.vue";
-import {__} from "@/Hooks/useTranslation.js";
 import RegisterModal from "@/Pages/Auth/RegisterModal.vue";
 import {ref} from "vue";
+import {__} from "@/Hooks/useTranslation.js";
 
 const showModal=ref(false);
 
