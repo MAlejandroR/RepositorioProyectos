@@ -7,11 +7,31 @@ import {watch} from "vue";
 import RegisterModal from "@/Pages/Auth/RegisterModal.vue";
 import {ref} from "vue";
 import {__} from "@/Hooks/useTranslation.js";
+import {useForm} from "@inertiajs/vue3";
+import InputError from "@/Components/InputError.vue";
 
 function register(){
     console.log("Login. register. emitiendo el evento");
+    console.log(form.errors);
     emit('update:showModal',true);
 }
+
+
+const submit = () => {
+    form.transform(data => ({
+        ...data,
+        remember: form.remember ? 'on' : '',
+    })).post(route('login'), {
+        onFinish: () => form.reset('password'),
+    });
+};
+const form = useForm({
+    email:"",
+    password:"",
+    remember:false
+
+
+});
 
 
 const props = defineProps({
@@ -23,22 +43,31 @@ const emit = defineEmits(['update:showModal']);
 </script>
 
 <template>
-    <form >
+    <form onsubmit="login">
         <div class="form-control mt-4">
             <InputLabel class="text-xl ">
                 <span class="label-text">  {{ __('Email') }}</span>
             </InputLabel>
-            <TextInput type="email" placeholder="email"
-                       class="input input-bordered text-xl" required/>
+            <TextInput type="email" placeholder="email" name="email"
+                       v-model="form.email"
+                       class="input input-bordered text-xl" required
+            />
+            <InputError class="mt-2" :message="form.errors.email" />
+
         </div>
         <div class="form-control mt-4">
             <InputLabel class="text-xl">
                 <span class="label-text">{{ __("Password") }}</span>
             </InputLabel>
-            <TextInput type="password" placeholder="password" class="input input-bordered" required/>
+            <TextInput type="password" name="password"
+                       placeholder="password"
+                       v-model="form.password"
+                       class="input input-bordered" required/>
             <InputLabel class="label">
                 <a href="#" class="label-text-alt link link-hover">{{ __("Forgot password?") }}</a>
             </InputLabel>
+            <InputError class="mt-2" :message="form.errors.password" />
+
         </div>
         <div class="form-control mt-6">
             <PrimaryButton class="btn btn-primary">{{ __("Login") }}</PrimaryButton>

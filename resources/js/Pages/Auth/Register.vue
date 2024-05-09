@@ -15,7 +15,7 @@ const props =defineProps({
 const form = useForm({
     name: '',
     email: '',
-    departamento: ''
+    departamento: '',
     password: '',
     password_confirmation: '',
     terms: false,
