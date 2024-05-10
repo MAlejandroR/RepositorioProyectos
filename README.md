@@ -8,7 +8,6 @@ Puedes incluir este paquete en tu proyecto Laravel mediante Composer.
 Ejecuta el siguiente comando en tu terminal:
 
 ``` bash
-
 composer require google/apiclient
 ```
 

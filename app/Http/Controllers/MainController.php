@@ -28,4 +28,9 @@ class MainController extends Controller
             'departaments'=>$departaments
         ]);
     }
+    public function show_projects(){
+        return Inertia::render("Projects/Listado");
+
+
+    }
 }

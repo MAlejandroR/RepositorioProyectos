@@ -48,7 +48,9 @@ class HandleInertiaRequests extends Middleware
                 $text = json_decode($text, true);
 //                info("json decode es ".json_encode($text));
                 return ($text);
-            }//
+
+            },
+            'user'=>fn()=>$request->user() ?? null,
         ]);
 
     }

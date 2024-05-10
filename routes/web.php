@@ -3,9 +3,11 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\MainController;
 
 Route::get('/1', fn()=> Inertia::render("W1"));
-Route::get('/', \App\Http\Controllers\MainController::class);
+Route::get('/', MainController::class)->middleware("guest");
+Route::get('/listado',[MainController::class, "show_projects"])->name('listado')->middleware("guest");
 
 Route::middleware([
     'auth:sanctum',

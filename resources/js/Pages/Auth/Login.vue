@@ -43,7 +43,7 @@ const emit = defineEmits(['update:showModal']);
 </script>
 
 <template>
-    <form onsubmit="login">
+    <form  onsubmit="(e)=>e.preventDefault()" method="post">
         <div class="form-control mt-4">
             <InputLabel class="text-xl ">
                 <span class="label-text">  {{ __('Email') }}</span>
@@ -70,7 +70,7 @@ const emit = defineEmits(['update:showModal']);
 
         </div>
         <div class="form-control mt-6">
-            <PrimaryButton class="btn btn-primary">{{ __("Login") }}</PrimaryButton>
+            <PrimaryButton @click="submit" class="btn btn-primary">{{ __("Login") }}</PrimaryButton>
         </div>
 
     </form>
