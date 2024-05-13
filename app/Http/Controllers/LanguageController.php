@@ -25,7 +25,7 @@ class LanguageController extends Controller
         $datos = json_decode($translation,true);
         $title=$datos['Project Repository'];
         info("3.-LanguageController.  title -$title-");
-        info("3.-LanguageController.  translation -$translation-");
+        info("4.-LanguageController.  translation -$translation-");
         return response()->json(["translation"=>$translation, "title"=>$title]);
 
 

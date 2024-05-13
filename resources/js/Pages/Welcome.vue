@@ -6,6 +6,7 @@ import DropDownLang from "@/Components/DropDown-lang.vue";
 import RegisterModal from "@/Pages/Auth/RegisterModal.vue";
 import {ref} from "vue";
 import {__} from "@/Hooks/useTranslation.js";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const showModal=ref(false);
 
@@ -25,7 +26,8 @@ function updateShowModal(newValue){
 }
 </script>
 <template>
-    <RegisterModal :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />
+<!--    <RegisterModal :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />-->
+    <RegisterModal :departaments="departaments" :visible=false />
     <Head title="Proyectos"/>
     <div class="flex flex-row sm:flex-row h-screen w-screen">
         <div class="w-2/3 flex justify-center items-center p-10 rounded rounded-2xl
@@ -54,7 +56,9 @@ function updateShowModal(newValue){
 
                 <div class="shadow-2xl h-4/6 bg-white p-10 rounded-lg">
                     <Login :showModal="showModal" @update:showModal="updateShowModal"/>
+
                 </div>
+
             </div>
         </div>
     </div>
