@@ -10,40 +10,46 @@ import {__} from "@/Hooks/useTranslation.js";
 import {useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
-function register(){
-    console.log("Login. register. emitiendo el evento");
-    console.log(form.errors);
-    emit('update:showModal',true);
-}
 
-
-const submit = () => {
-    form.transform(data => ({
-        ...data,
-        remember: form.remember ? 'on' : '',
-    })).post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
-const form = useForm({
-    email:"",
-    password:"",
-    remember:false
-
-
-});
-
-
-const props = defineProps({
-        showModal: Boolean
-    });
+// const props = defineProps({
+//     showModal: Boolean
+// });
 
 const emit = defineEmits(['update:showModal']);
+
+function register(){
+    console.log("Login. register. emitiendo el evento");
+    console.log(errors);
+    emit('update:showModal',true);
+}
+const form = useForm({
+    email: "",
+    password: "",
+    remember: false
+});
+
+const submit = () => {
+    console.log(form.post)
+    try {
+        form.post('login', {
+            preserveScroll: true,
+            onSuccess: () => console.log('Login successful'),
+            onError: () => console.log('Error during login')
+        });
+    }catch(error){
+        console.log ("Login.submit error" );
+        console.log (error );
+
+    }
+};
+
+
+
 
 </script>
 
 <template>
-    <form  onsubmit="(e)=>e.preventDefault()" method="post">
+    <form @submit.prevent="submit">
         <div class="form-control mt-4">
             <InputLabel class="text-xl ">
                 <span class="label-text">  {{ __('Email') }}</span>
@@ -70,7 +76,7 @@ const emit = defineEmits(['update:showModal']);
 
         </div>
         <div class="form-control mt-6">
-            <PrimaryButton @click="submit" class="btn btn-primary">{{ __("Login") }}</PrimaryButton>
+            <PrimaryButton class="btn btn-primary">{{ __("Login") }}</PrimaryButton>
         </div>
 
     </form>

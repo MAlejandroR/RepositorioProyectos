@@ -15,7 +15,7 @@ class MainController extends Controller
 //        session()->flush();
         $list_of_lang = config("language");
         $departaments = config("departaments");
-        info ($departaments);
+//        info ($departaments);
 
 
 
