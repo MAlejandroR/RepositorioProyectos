@@ -26,8 +26,7 @@ function updateShowModal(newValue){
 }
 </script>
 <template>
-<!--    <RegisterModal :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />-->
-    <RegisterModal :departaments="departaments" :visible=false />
+    <RegisterModal :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />
     <Head title="Proyectos"/>
     <div class="flex flex-row sm:flex-row h-screen w-screen">
         <div class="w-2/3 flex justify-center items-center p-10 rounded rounded-2xl
