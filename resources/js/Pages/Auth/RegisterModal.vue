@@ -4,13 +4,14 @@ import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { __ } from "@/Hooks/useTranslation.js";
-import {useForm} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
 const datos = defineProps({
     visible: Boolean,
     departaments: Array
 });
+
 
 console.log("En RegisterModal Departamentos" + datos.departaments);
 //Definimos un evento para notificar al padre una modificación de la propiedad visible para q
@@ -23,6 +24,7 @@ const form = useForm({
     departamento:"",
     password:"",
     password_confirmation: '',
+    _token:usePage().props.csrf_token,
     terms: false,
 });
 // const email = ref('');
@@ -32,10 +34,9 @@ const form = useForm({
 
 const submit = () => {
     console.log("En RegisterModal - submit")
-    form.post(route('register'), {
+    form.post('/register', {
         onFinish: () => form.reset('password', 'password_confirmation'),
         onSuccess:()=>    emit('update:visible', false)
-
     });
     // form.post('/register', {
     //     onFinish: () => form.reset('password', 'password_confirmation'),
@@ -51,7 +52,7 @@ function close() {
 
 <template>
     <div v-if="visible" class="my-modal">
-        <div class="modal-box">
+            <div class="modal-box">
             <h2 class="font-bold">{{ __("Register") }}</h2>
             <form @submit.prevent="submit">
                 <div class="form-control mt-4">
@@ -67,6 +68,7 @@ function close() {
                     </InputLabel>
                     <TextInput type="email" v-model="form.email" placeholder="email"
                                class="input input-bordered text-xl" required/>
+                    <InputError class="mt-2" :message="form.errors.name" />
                 </div>
 
                 <div class="form-control mt-4">
@@ -74,6 +76,7 @@ function close() {
                         <span class="label-text">{{ __("Password") }}</span>
                     </InputLabel>
                     <TextInput type="password" v-model="form.password" placeholder="password" class="input input-bordered" required/>
+                    <InputError class="mt-2" :message="form.errors.password" />
                 </div>
                 <div class="mt-4">
                     <InputLabel for="password_confirmation"
@@ -96,10 +99,8 @@ function close() {
                         <option v-for="departament in departaments">
                         {{departament}}
                         </option>
-
                     </select>
-
-
+                    <InputError class="mt-2" :message="form.errors.departamento" />
                 </div>
                 <div class="form-control mt-6">
                     <PrimaryButton class="btn btn-primary">{{ __("Register") }}</PrimaryButton>

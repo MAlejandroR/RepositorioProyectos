@@ -11,15 +11,13 @@ import {useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
 
-// const props = defineProps({
-//     showModal: Boolean
-// });
+const props = defineProps({
+    showModal: Boolean
+});
 
 const emit = defineEmits(['update:showModal']);
 
 function register(){
-    console.log("Login. register. emitiendo el evento");
-    console.log(errors);
     emit('update:showModal',true);
 }
 const form = useForm({
