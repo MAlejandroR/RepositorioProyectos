@@ -359,5 +359,7 @@
     "You may not delete your personal team.": "You may not delete your personal team.",
     "You may not leave a team that you created.": "You may not leave a team that you created.",
     "Your email address is unverified.": "Your email address is unverified.",
-    "Department": "Department"
-}
+    "Department": "Department",
+    "Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.":"Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
+    "Project Repository of CPI FP Los Enlaces.":"Project Repository of CPI FP Los Enlaces."
+

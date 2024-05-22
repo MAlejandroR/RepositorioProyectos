@@ -2,7 +2,12 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Welcome from '@/Components/Welcome.vue';
 import {__} from "@/Hooks/useTranslation.js";
+import {defineProps} from "vue";
 
+const datos = defineProps({
+    translate: Object,
+    list_of_lang: Object,
+});
 </script>
 
 <template>
