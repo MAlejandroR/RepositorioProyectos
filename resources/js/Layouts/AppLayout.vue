@@ -8,6 +8,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import {__} from "@/Hooks/useTranslation.js";
+import DropDownLang from "@/Components/DropDown-lang.vue";
 
 
 defineProps({
@@ -206,6 +207,9 @@ const logout = () => {
                             </div>
 
                             <div>
+                                <div class="self-stretch flex justify-end">
+                                    <DropDownLang :list_of_lang=list_of_lang />
+                                </div>
                                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">
                                     {{ $page.props.auth.user.name }}
                                 </div>
@@ -270,17 +274,18 @@ const logout = () => {
                                     </template>
                                 </template>
                             </template>
+
                         </div>
                     </div>
                 </div>
             </nav>
 
             <!-- Page Heading -->
-            <header v-if="$slots.header" class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
+<!--            <header v-if="$slots.header" class="bg-white dark:bg-gray-800 shadow">-->
+<!--                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">-->
+<!--                    <slot name="header" />-->
+<!--                </div>-->
+<!--            </header>-->
 
             <!-- Page Content -->
             <main>

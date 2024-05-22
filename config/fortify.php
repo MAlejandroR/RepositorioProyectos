@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'home' => '/listado',
+    'home' => '/dashboard',
 
     /*
     |--------------------------------------------------------------------------
@@ -147,13 +147,14 @@ return [
         Features::registration(),
         Features::resetPasswords(),
         Features::emailVerification(),
-        Features::updateProfileInformation(),
+    //    Features::updateProfileInformation(),
         Features::updatePasswords(),
-        Features::twoFactorAuthentication([
+    /*    Features::twoFactorAuthentication([
             'confirm' => true,
             'confirmPassword' => true,
             // 'window' => 0,
         ]),
+    */
     ],
 
 ];
