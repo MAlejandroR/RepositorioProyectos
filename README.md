@@ -70,3 +70,7 @@ Estoy con el cambio de idiomas a través del componente Dropdown
 1. -Desplegar el web.infenlaces.com
 1. - Tema de autenticación 
 1. - Roles: **Admin, alumno, profesor**
+
+
+## Actual
+!(Actual en desarrollo)[./Documentacion/actual.md]

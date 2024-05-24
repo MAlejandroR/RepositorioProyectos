@@ -1,7 +1,6 @@
 {
     "Project Repository": "Répertoire de Projets",
     "(and :count more error)": "(et :count erreur en plus)",
-    "(and :count more errors)": "(et :count erreur en plus)|(et :count erreurs en plus)|(et :count erreurs en plus)",
     "A new verification link has been sent to the email address you provided in your profile settings.": "Un nouveau lien de vérification a été envoyé à l'adresse e-mail que vous avez indiquée dans vos paramètres de profil.",
     "A new verification link has been sent to your email address.": "Un nouveau lien de vérification a été envoyé à votre adresse e-mail.",
     "A Timeout Occurred": "Un dépassement de délai s'est produit",

@@ -1,0 +1,1 @@
+## Listado.vue> Listado es el componente dasboard al que entramos una vez registrados y validados* Primero el header del dasboard* Vamos a visualizar un dasboard con tarjetas porciclo * Al presionar tarjeta un listado de los proyectos
