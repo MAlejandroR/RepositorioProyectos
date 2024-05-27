@@ -50,8 +50,10 @@ class HandleInertiaRequests extends Middleware
                 return ($text);
 
             },
-            'user'=>fn()=>$request->user() ?? null,
-            'csrf_token' => csrf_token()
+            'user' => fn() => $request->user() ?? null,
+            'csrf_token' => csrf_token(),
+            'list_of_lang' => config("language"),
+            'departaments' => config("departaments")
         ]);
 
     }
