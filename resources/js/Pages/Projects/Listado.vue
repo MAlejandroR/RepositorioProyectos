@@ -6,7 +6,6 @@ import {__} from "@/Hooks/useTranslation.js";
 
 const datos = defineProps({
     translate: Object,
-    list_of_lang: Object,
     departaments: Array
 });
 
