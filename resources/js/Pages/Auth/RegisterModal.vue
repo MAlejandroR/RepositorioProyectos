@@ -19,11 +19,11 @@ const emit = defineEmits(['update:visible']);
 
 
 const form = useForm({
-    email:"",
-    name:"",
-    departamento:"",
-    password:"",
-    password_confirmation: '',
+    email:"manuelromeromiguel@gmail.com",
+    name:"Manuel",
+    departamento:"informatica",
+    password:"12345678",
+    password_confirmation: '12345678',
     _token:usePage().props.csrf_token,
     terms: false,
 });
