@@ -1,136 +1,142 @@
-<!-- resources/js/Pages/Auth/RegisterModal.vue -->
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import LoadingSpinner from '@/Components/LoadingSpinner.vue';
+import { ref } from 'vue';
+import TextInput from "@/Components/TextInput.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { __ } from "@/Hooks/useTranslation.js";
+import {useForm, usePage} from "@inertiajs/vue3";
+import InputError from "@/Components/InputError.vue";
+import LoadingSpinner from "@/Components/LoadingSpinner.vue";
 
-const emit = defineEmits(['update:showModal']);
-
-const props = defineProps({
-    departamento: Array
+const datos = defineProps({
+    visible: Boolean,
+    departaments: Array
 });
-
-const form = useForm({
-    name: '',
-    email: '',
-    departamento: '',
-    password: '',
-    password_confirmation: '',
-    terms: false,
-});
-
 const isLoading = ref(false);
 
+
+console.log("En RegisterModal Departamentos" + datos.departaments);
+console.log("Errores" + datos.departaments);
+
+//Definimos un evento para notificar al padre
+// una modificación de la propiedad visible para q
+const emit = defineEmits(['update:visible']);
+
+
+const form = useForm({
+    email:"manuelromeromiguel@gmail.com",
+    name:"Manuel",
+    departamento:"informatica",
+    password:"12345678",
+    password_confirmation: '12345678',
+    _token:usePage().props.csrf_token,
+    terms: false,
+});
+// const email = ref('');
+// const name = ref('');
+// const password = ref('');
+// const departamento= ref('');
+
 const submit = () => {
-    emit('update:showModal', false);
-    isLoading.value = true;
-    form.post(route('register'), {
+    console.log("En RegisterModal - submit")
+    isLoading.value=true;
+    form.post('/register', {
         onFinish: () => {
             form.reset('password', 'password_confirmation');
-            isLoading.value = false;
-        }
+            isLoading.value=false;
+        },
+        onSuccess:()=>    emit('update:visible', false)
     });
+    // form.post('/register', {
+    //     onFinish: () => form.reset('password', 'password_confirmation'),
+    //     preserveScroll: true,
+    //     onSuccess: () => console.log('Registro completado con éxito')
+    // });
 };
+function close() {
+    console.log("Resiter-modal, close");
+    emit('update:visible', false);
+}
 </script>
 
 <template>
-    <Head title="Register" />
+    <LoadingSpinner :visibleLoading="isLoading" />
 
-    <LoadingSpinner :visible="isLoading" />
-
-    <form @submit.prevent="submit">
-        <div>
-            <InputLabel for="name" value="Name" />
-            <TextInput
-                id="name"
-                v-model="form.name"
-                type="text"
-                class="mt-1 block w-full"
-                required
-                autofocus
-                autocomplete="name"
-            />
-            <InputError class="mt-2" :message="form.errors.name" />
-        </div>
-
-        <div class="mt-4">
-            <InputLabel for="email" value="Email" />
-            <TextInput
-                id="email"
-                v-model="form.email"
-                type="email"
-                class="mt-1 block w-full"
-                required
-                autocomplete="username"
-            />
-            <InputError class="mt-2" :message="form.errors.email" />
-        </div>
-
-        <div class="mt-4">
-            <InputLabel for="password" value="Password" />
-            <TextInput
-                id="password"
-                v-model="form.password"
-                type="password"
-                class="mt-1 block w-full"
-                required
-                autocomplete="new-password"
-            />
-            <InputError class="mt-2" :message="form.errors.password" />
-        </div>
-
-        <div class="mt-4">
-            <InputLabel for="password_confirmation" value="Confirm Password" />
-            <TextInput
-                id="password_confirmation"
-                v-model="form.password_confirmation"
-                type="password"
-                class="mt-1 block w-full"
-                required
-                autocomplete="new-password"
-            />
-            <InputError class="mt-2" :message="form.errors.password_confirmation" />
-        </div>
-
-        <div class="mt-4">
-            Departamento
-            <InputLabel for="departamento" value="Departamento" />
-            <TextInput
-                id="departamento"
-                v-model="form.departamento"
-                type="select"
-                class="mt-1 block w-full"
-                required
-            >
-                <TextInput type="options" v-model="form.departamento" />
-            </TextInput>
-            <InputError class="mt-2" :message="form.errors.departament" />
-        </div>
-
-        <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-            <InputLabel for="terms">
-                <div class="flex items-center">
-                    <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
-
-                    <div class="ms-2">
-                        I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">Privacy Policy</a>
-                    </div>
+    <div v-if="visible" class="my-modal">
+            <div class="modal-box">
+            <h2 class="font-bold">{{ __("Register") }}</h2>
+            <form @submit.prevent="submit">
+                <div class="form-control mt-4">
+                    <InputLabel class="text-xl">
+                        <span class="label-text">{{ __('Name') }}</span>
+                    </InputLabel>
+                    <TextInput type="text" v-model="form.name" placeholder="name"
+                               class="input input-bordered text-xl" required/>
                 </div>
-                <InputError class="mt-2" :message="form.errors.terms" />
-            </InputLabel>
-        </div>
+                <div class="form-control mt-4">
+                    <InputLabel class="text-xl">
+                        <span class="label-text">{{ __('Email') }}</span>
+                    </InputLabel>
+                    <TextInput type="email" v-model="form.email" placeholder="email"
+                               class="input input-bordered text-xl" required/>
+                    <InputError class="mt-2" :message="form.errors.email" />
+                </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <Link :href="route('login')" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                Already registered?
-            </Link>
-
-            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Register
-            </PrimaryButton>
+                <div class="form-control mt-4">
+                    <InputLabel class="text-xl">
+                        <span class="label-text">{{ __("Password") }}</span>
+                    </InputLabel>
+                    <TextInput type="password" v-model="form.password" placeholder="password" class="input input-bordered" required/>
+                    <InputError class="mt-2" :message="form.errors.password" />
+                </div>
+                <div class="mt-4">
+                    <InputLabel for="password_confirmation"
+                                value="Confirm Password" />
+                    <TextInput
+                        id="password_confirmation"
+                        v-model="form.password_confirmation"
+                        type="password"
+                        class="mt-1 block w-full"
+                        required
+                        autocomplete="new-password"
+                    />
+                    <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                </div>
+                <div class="form-control mt-4">
+                    <InputLabel class="text-xl">
+                        <span class="label-text">{{ __("Department") }}</span>
+                    </InputLabel>
+                    <select name="departamento" v-model="form.departamento" placeholder="departamento" class="input input-bordered" required>
+                        <option v-for="departament in departaments">
+                        {{departament}}
+                        </option>
+                    </select>
+                    <InputError class="mt-2" :message="form.errors.departamento" />
+                </div>
+                <div class="form-control mt-6">
+                    <PrimaryButton class="btn btn-primary">{{ __("Register") }}</PrimaryButton>
+                </div>
+            </form>
+            <div class="modal-action">
+                <PrimaryButton @click="close">{{ __("Close") }}</PrimaryButton>
+            </div>
         </div>
-    </form>
+    </div>
 </template>
+
+
+<style scoped>
+.my-modal {
+    /* Estilos del modal */
+    position: fixed; /* or absolute */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+</style>

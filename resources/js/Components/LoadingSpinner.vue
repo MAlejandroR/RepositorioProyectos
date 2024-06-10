@@ -1,15 +1,19 @@
 <!-- resources/js/Components/LoadingSpinner.vue -->
+
 <template>
-    <div class="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 z-50" v-if="visible">
-        <div class="loader"></div>
+    <div class="fixed inset-0 flex items-center
+    justify-center bg-gray-100 bg-opacity-50
+     z-50" v-if="visibleLoading">
+        <div class="loader m-5 text-xl text-red-800">{{__("Wait please")}}</div>
     </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
+import {__} from "@/Hooks/useTranslation.js";
 
 const props = defineProps({
-    visible: {
+    visibleLoading: {
         type: Boolean,
         default: false
     }

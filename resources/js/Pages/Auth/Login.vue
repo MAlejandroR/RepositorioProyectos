@@ -4,7 +4,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {watch} from "vue";
-import RegisterModal from "@/Pages/Auth/RegisterModal.vue";
+import Register from "@/Pages/Auth/Register.vue";
 import {ref} from "vue";
 import {__} from "@/Hooks/useTranslation.js";
 import {useForm} from "@inertiajs/vue3";
