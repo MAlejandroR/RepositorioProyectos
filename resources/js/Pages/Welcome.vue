@@ -1,12 +1,13 @@
 <script setup>
-import {Head} from '@inertiajs/vue3';
+import {Head, usePage} from '@inertiajs/vue3';
 import Login from "@/Pages/Auth/Login.vue";
 import { defineProps  } from "vue";
 import DropDownLang from "@/Components/DropDown-lang.vue";
-import RegisterModal from "@/Pages/Auth/RegisterModal.vue";
+import Register from "@/Pages/Auth/Register.vue";
 import {ref} from "vue";
 import {__} from "@/Hooks/useTranslation.js";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Banner from "@/Components/Banner.vue";
 
 const showModal=ref(false);
 
@@ -15,6 +16,7 @@ const datos = defineProps({
     list_of_lang: Object,
     departaments: Array
 });
+console.log ("sessiones "+usePage().flash);
 console.log ("Departamentos  "+datos.departaments);
 
 console.log ("Listado de lenguajes "+datos.list_of_lang);
@@ -26,8 +28,10 @@ function updateShowModal(newValue){
 }
 </script>
 <template>
-    <RegisterModal :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />
+    <Register :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />
     <Head title="Proyectos"/>
+    <Banner />
+
     <div class="flex flex-row sm:flex-row h-screen w-screen">
         <div class="w-2/3 flex justify-center items-center p-10 rounded rounded-2xl
                 bg-hero-pattern bg-cover bg-no-repeat bg-center h-screen">

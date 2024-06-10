@@ -14,6 +14,12 @@ export default {
 
     theme: {
         extend: {
+            maxWidth: {
+                'custom': '300px',
+            },
+            maxHeight: {
+                'custom': '200px',
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

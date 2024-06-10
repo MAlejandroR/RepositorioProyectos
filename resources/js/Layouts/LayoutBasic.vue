@@ -2,6 +2,7 @@
 import DropDownLang from "@/Components/DropDown-lang.vue";
 import {usePage} from "@inertiajs/vue3";
 import ApplicationMark from "@/Components/ApplicationMark.vue";
+import {Head} from "@inertiajs/vue3";
 
 defineProps({
     title: String,
@@ -12,6 +13,7 @@ const list_of_lang = usePage().props.list_of_lang;
 
 <template>
     <Head :title="title"/>
+
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
      <header class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 flex justify-around mx-3">
          <!-- Logo -->
@@ -25,6 +27,7 @@ const list_of_lang = usePage().props.list_of_lang;
         </nav>
      </header>
         <slot />
+
     </div>
 </template>
 

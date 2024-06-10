@@ -53,7 +53,15 @@ class HandleInertiaRequests extends Middleware
             'user' => fn() => $request->user() ?? null,
             'csrf_token' => csrf_token(),
             'list_of_lang' => config("language"),
-            'departaments' => config("departaments")
+            'departaments' => config("departaments"),
+            'flash' => function () use ($request) {
+                return [
+                    'message' => $request->session()->get('message'),
+                    'banner' => $request->session()->get('banner'),
+                    'bannerStyle' => $request->session()->get('bannerStyle')
+                    // Asegúrate de setear esto donde manejas las excepciones
+                ];
+            },
         ]);
 
     }

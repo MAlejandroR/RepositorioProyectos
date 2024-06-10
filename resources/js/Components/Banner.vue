@@ -8,10 +8,13 @@ const style = ref('success');
 const message = ref('');
 
 watchEffect(async () => {
-    style.value = page.props.jetstream.flash?.bannerStyle || 'success';
-    message.value = page.props.jetstream.flash?.banner || '';
+    style.value = page.props.flash?.bannerStyle || 'success';
+    message.value = page.props.flash?.banner || '';
     show.value = true;
 });
+console.log("En banner =>");
+console.log(`valor de mensaje -${message.value}-`);
+
 </script>
 
 <template>
@@ -31,6 +34,7 @@ watchEffect(async () => {
                         </span>
 
                         <p class="ms-3 font-medium text-sm text-white truncate">
+                            banner
                             {{ message }}
                         </p>
                     </div>
