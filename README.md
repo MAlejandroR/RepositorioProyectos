@@ -62,7 +62,7 @@ APP_FAKER_LOCALE=en_US
 
 ## Pendiente (1/04/2024)
 Estoy con el cambio de idiomas a través del componente Dropdown
-## [Idiomas](./Documentacion/idiomas.md)    
+## ![Idiomas](./Documentacion/idiomas.md)    
 
 ## [Login]()
 
@@ -73,4 +73,11 @@ Estoy con el cambio de idiomas a través del componente Dropdown
 
 
 ## Actual
-!(Actual en desarrollo)[./Documentacion/actual.md]
+[Actual en desarrollo](./Documentacion/actual.md)
+
+## Pendientes
+* Hacer la aplicacion responsiva
+* EL deplegable de idiomas 
+
+# Roles
+[Roles ](./Documentacion/roles.md)

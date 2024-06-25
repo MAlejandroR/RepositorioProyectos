@@ -31,5 +31,17 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+        // Asignar rol en función del dominio del correo electrónico
+        $emailDomain = substr(strrchr($input['email'], "@"), 1);
+        info ("CreateNewUser -$emailDomain-");
+
+        if ($emailDomain === 'cpilosenlaces.com') {
+            info ("Asignando teacher");
+            $user->assignRole('teacher');
+        } else {
+            info ("Asignando student");
+            $user->assignRole('student');
+        }
     }
+
 }
