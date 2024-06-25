@@ -16,6 +16,7 @@ defineProps({
     title: String,
 });
 const list_of_lang = usePage().props.list_of_lang;
+const rol = usePage().props.rol;
 const showingNavigationDropdown = ref(false);
 
 const switchToTeam = (team) => {
@@ -128,7 +129,7 @@ const logout = () => {
                 <!-- Responsive Navigation Menu -->
               </nav>
 
-                 Page Heading
+            {{__("Type of user")}} : {{rol}}
                 <header v-if="$slots.header" class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         <slot name="header" />

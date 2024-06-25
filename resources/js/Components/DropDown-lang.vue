@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps } from 'vue';
+import {ref, defineProps, onMounted} from 'vue';
 import {useTranslationStore} from "@/stores/translationsStore.js";
 import {useTitleStore} from "@/stores/titleStore.js";
 import { Inertia } from '@inertiajs/inertia';
@@ -9,6 +9,7 @@ const { lang, list_of_lang } = defineProps({
     lang: String,
     list_of_lang: Object
 });
+const dropDownRef = ref(null);
 
 // Usar `ref` para reactividad en componentes compuestos (opcional en este caso).
 const selectedLang = ref(lang);
@@ -26,6 +27,10 @@ const change_lang = async (selectedLang) => {
         titleStore.updateTitle(response.data.title);
         console.log(`cambiando a ${selectedLang}`);
         // console.log(response.data.translations);
+        // Cerrar el desplegable
+        if (dropDownRef.value) {
+            dropDownRef.value.open = false;
+        }
     }catch (error){
         console.error("Error al cambiar el idioma:", error);
     }
@@ -42,11 +47,19 @@ const change_lang = async (selectedLang) => {
     //     onError: () => console.log("Error al cambiar el idioma."),
     // });
 };
+onMounted(()=>{
+    document.addEventListener('click',handleClickOutsite)
+})
+const handleClickOutsite = (event)=>{
+    if (dropDownRef.value && !dropDownRef.value.contains(event.target)){
+        dropDownRef.value.open = false;
+    }
+}
 </script>
 
 <template>
 
-    <details class="dropdown bg-amber-100 rounded-2xl relative">
+    <details ref="dropDownRef" class="dropdown bg-amber-100 rounded-2xl relative">
         <summary class="m-1 btn ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="w-6 h-6">
@@ -68,8 +81,6 @@ const change_lang = async (selectedLang) => {
 
         </ul>
     </details>
-
-
 </template>
 
 <style scoped>

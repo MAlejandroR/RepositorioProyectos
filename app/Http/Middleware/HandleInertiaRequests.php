@@ -51,6 +51,7 @@ class HandleInertiaRequests extends Middleware
 
             },
             'user' => fn() => $request->user() ?? null,
+            'rol'=>fn () => $request->user()? $request->user()->getRoleNames()->first() : null,
             'csrf_token' => csrf_token(),
             'list_of_lang' => config("language"),
             'departaments' => config("departaments"),
