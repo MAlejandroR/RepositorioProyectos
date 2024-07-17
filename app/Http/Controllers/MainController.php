@@ -13,8 +13,8 @@ class MainController extends Controller
     //
     public function __invoke(){
 //        session()->flush();
-        info ("En Maincontroller@__invoke ");
-        info (session()->all());
+//        info ("En Maincontroller@__invoke ");
+//        info (session()->all());
         $list_of_lang = config("language");
         $departaments = config("departaments");
 //        info ($departaments);

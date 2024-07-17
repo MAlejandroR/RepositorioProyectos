@@ -43,13 +43,12 @@ const submit = () => {
 
 
 
-
 </script>
 
 <template>
     <form @submit.prevent="submit">
         <div class="form-control mt-4">
-            <InputLabel class="text-xl ">
+            <InputLabel class="text-3xl ">
                 <span class="label-text">  {{ __('Email') }}</span>
             </InputLabel>
             <TextInput type="email" placeholder="email" name="email"

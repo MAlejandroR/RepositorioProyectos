@@ -19,19 +19,23 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        info ("CreateNewUser @ create");
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
+        info ("CreateNewUser - Next validate");
 
-        return User::create([
+
+        $user= User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
         // Asignar rol en función del dominio del correo electrónico
+        info(" CreateNewUser con email ". $input['email']);
         $emailDomain = substr(strrchr($input['email'], "@"), 1);
         info ("CreateNewUser -$emailDomain-");
 
@@ -42,6 +46,8 @@ class CreateNewUser implements CreatesNewUsers
             info ("Asignando student");
             $user->assignRole('student');
         }
+        return $user;
     }
+
 
 }
