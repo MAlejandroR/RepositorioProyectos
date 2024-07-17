@@ -75,9 +75,16 @@ Estoy con el cambio de idiomas a través del componente Dropdown
 ## Actual
 [Actual en desarrollo](./Documentacion/actual.md)
 
-## Pendientes
-* Hacer la aplicacion responsiva
-* EL deplegable de idiomas 
 
 # Roles
 [Roles ](./Documentacion/roles.md)
+
+
+## Pendientes
+* Hacer la aplicacion responsiva  (a medias)
+* EL deplegable de idiomas
+*  El Servidor de correo
+* Dasboard (17-07-2024)
+** El dasboard de teacher
+** El dasboard de student
+** El dasboard de admin
