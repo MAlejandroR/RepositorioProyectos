@@ -13,9 +13,9 @@ class LanguageController extends Controller
     public function __invoke(Request $request)
     {
         $locale = $request->input("locale");
-        info("1.-LanguageController.  locale -$locale-");
+//        info("1.-LanguageController.  locale -$locale-");
         session()->put("locale", $locale);
-        info("2.-LanguageController. Valor de app()->getLocale -".app()->getLocale()."-");
+//        info("2.-LanguageController. Valor de app()->getLocale -".app()->getLocale()."-");
 //       return redirect()->back();
 
         //Esto me enviaría a la página de la que vengo
@@ -24,8 +24,8 @@ class LanguageController extends Controller
         $translation = file_get_contents(base_path("lang/$locale.json"));
         $datos = json_decode($translation,true);
         $title=$datos['Project Repository'];
-        info("3.-LanguageController.  title -$title-");
-        info("4.-LanguageController.  translation -$translation-");
+//        info("3.-LanguageController.  title -$title-");
+//        info("4.-LanguageController.  translation -$translation-");
         return response()->json(["translation"=>$translation, "title"=>$title]);
 
 

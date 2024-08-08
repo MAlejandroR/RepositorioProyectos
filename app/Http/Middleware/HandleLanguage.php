@@ -18,8 +18,8 @@ class HandleLanguage
 
         $lang =app()->getLocale();
         session()->put("locale", $lang);
-        info("1.-HandleLanguaje (middelware) app()->getLocale=   -$lang-");
-        dd($request);
+//        info("1.-HandleLanguaje (middelware) app()->getLocale=   -$lang-");
+
         return $next($request);
     }
 }
