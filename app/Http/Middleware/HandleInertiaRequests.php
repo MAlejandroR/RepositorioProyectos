@@ -39,9 +39,9 @@ class HandleInertiaRequests extends Middleware
             'translate' => function () {
                 $lang = session()->get("locale") ?? app()->getLocale();
                 session()->put("locale", $lang);
-                info("lang es -$lang- ");
+//                info("lang es -$lang- ");
                 $dir = "lang/$lang.json";
-                info("dir $dir ");
+//                info("dir $dir ");
                 $text = file_get_contents(base_path($dir));
 
 //                info("El fichero json es ".$text);

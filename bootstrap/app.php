@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Inertia\Inertia;
+use App\Http\Middleware\RedirectBasedOnRoleMiddleware;
 
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -16,10 +17,15 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 //        $middleware->append(\App\Http\Middleware\HandleLanguage::class);
+        $middleware->alias([
+            'role.redirect'=>RedirectBasedOnRoleMiddleware::class
+        ]);
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
+            RedirectBasedOnRoleMiddleware::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
+
 
         //
     })

@@ -1,3 +1,4 @@
+
 {
     "Project Repository": "Répertoire de Projets",
     "(and :count more error)": "(et :count erreur en plus)",
@@ -108,6 +109,7 @@
     "For your security, please confirm your password to continue.": "Par mesure de sécurité, veuillez confirmer votre mot de passe pour continuer.",
     "Forbidden": "Interdit",
     "Forgot your password?": "Mot de passe oublié ?",
+    "Forgot password?": "Mot de passe oublié ?",
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Mot de passe oublié ? Pas de soucis. Veuillez nous indiquer votre adresse e-mail et nous vous enverrons un lien de réinitialisation du mot de passe.",
     "Found": "A trouvé",
     "Gateway Timeout": "Délai d'attente de la passerelle",
