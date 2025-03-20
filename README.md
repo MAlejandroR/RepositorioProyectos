@@ -6,6 +6,7 @@ Un fichero de requisitos está en (./documenacion/requisitos.docs)
 Instala el paquete del cliente de Google: 
 Puedes incluir este paquete en tu proyecto Laravel mediante Composer. 
 Ejecuta el siguiente comando en tu terminal:
+Ejecuta el siguiente comando en tu terminal:
 
 ``` bash
 composer require google/apiclient

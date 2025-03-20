@@ -1,21 +1,38 @@
 
 
-<script>
-import Topbar from './../../../Components/Topbar.vue';
-import Sidebar from './../../../Components/Sidebar.vue';
+<script setup>
+import AppLayout from '@/Layouts/AppLayout.vue';
+import Welcome from '@/Components/Welcome.vue';
+import {__} from "@/Hooks/useTranslation.js";
+import {defineProps} from "vue";
 
-export default {
-    name: 'Index',
-    components: {
-        Topbar,
-        Sidebar,
-    },
-}
+const datos = defineProps({
+    translate: Object,
+    list_of_lang: Object,
+});
 </script>
+
 <!-- resources/js/Pages/Index.vue -->
 <template>
-    <h1>TEACHER</h1>
+    <AppLayout title="Repositorio Proyectos">
+        <h1>Esto es app layout</h1>
+        <!--        <template #header>-->
+        <!--            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">-->
+        <!--                {{ __("Project repository administration") }}-->
+        <!--            </h2>-->
+        <!--        </template>-->
+
+        <!--        <div class="py-12">-->
+        <!--            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">-->
+        <!--                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">-->
+        <!--                    <Welcome />-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </AppLayout>
+
 </template>
 <style scoped>
 /* Aquí puedes añadir estilos específicos para este componente */
 </style>
+

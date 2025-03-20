@@ -35,6 +35,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $this->info();
+
         return array_merge(parent::share($request), [
             'translate' => function () {
                 $lang = session()->get("locale") ?? app()->getLocale();
@@ -55,6 +57,7 @@ class HandleInertiaRequests extends Middleware
             'csrf_token' => csrf_token(),
             'list_of_lang' => config("language"),
             'departaments' => config("departaments"),
+            'models'=>config("models.models"),
             'flash' => function () use ($request) {
                 return [
                     'message' => $request->session()->get('message'),
@@ -65,5 +68,14 @@ class HandleInertiaRequests extends Middleware
             },
         ]);
 
+    }
+
+    /**
+     * @return void
+     */
+    public function info(): void
+    {
+        info("HandleInertiaRequest@share");
+        info(config('models.'));
     }
 }

@@ -1,5 +1,4 @@
 <template>
-
     <div class="drawer drawer-mobile">
         <input id="my-drawer" type="checkbox" class="drawer-toggle">
         <div class="drawer-content flex flex-col">
