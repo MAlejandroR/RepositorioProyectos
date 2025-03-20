@@ -27,7 +27,22 @@ export default {
                 "header":"rgb(231, 117, 30)"
             },
             height:{
-              "10v": "10vh"
+              "2v": "2vh",
+              "3v": "3vh",
+              "4v": "4vh",
+              "5v": "5vh",
+              "10v": "10vh",
+              "11v": "11vh",
+              "12v": "12vh",
+              "13v": "13vh",
+              "14v": "14vh",
+              "15v": "15vh",
+              "20v": "20vh",
+              "25v": "25vh",
+              "30v": "30vh",
+            },
+            width:{
+                "72v":"72"
             },
             backgroundImage: {
                 'hero-pattern': "url('/images/background_main.jpg')",

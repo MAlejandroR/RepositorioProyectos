@@ -19,6 +19,7 @@
         "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
         "laravel-lang/common": "^6.2",
+        "laravel-shift/blueprint": "^2.11",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
