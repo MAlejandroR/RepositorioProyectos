@@ -24,10 +24,13 @@ const datos = defineProps({
             <Sidebar class="w-1/4 bg-gray-100 p-4 shadow-lg" />
 
             <!-- Main content -->
+
             <div class="flex flex-col w-3/4">
                 <Header class="shadow-md p-4 bg-white" />
+
                 <Main class="flex-grow flex items-center justify-center">
                     <!-- Centered role-based image -->
+
                     <div class="text-center">
                         <img src="images/admin.jpeg" alt="User Role Image" class="w-48 h-48 object-cover rounded-full shadow-lg border-4 border-gray-300">
                         <h2 class="mt-4 text-2xl font-bold text-gray-700 capitalize">{{ role }}</h2>

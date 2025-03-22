@@ -43,7 +43,7 @@ function updateShowModal(newValue) {
             </div>
         </div>
         <div class="w-full sm:w-1/3 h-1/2 sm:h-screen flex flex-col justify-start
-         items-center bg-white rounded-3xl p-5">
+         items-center bg-gray-100 rounded-3xl p-5">
             <div class="self-stretch flex justify-between">
                 <img class="w-1/2" src="/images/logo.png" alt="logo Enlaces">
                 <DropDownLang :list_of_lang="list_of_lang" />
