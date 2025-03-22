@@ -29,6 +29,7 @@ const switchToTeam = (team) => {
 };
 
 const logout = () => {
+    console.log("en logout")
     router.post(route('logout'));
 };
 </script>

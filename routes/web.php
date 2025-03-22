@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Http\Controllers\HandlerProviderCallback;
 
 
 
@@ -17,26 +18,13 @@ Route::get('/auth/google', function () {
 });
 
 
-Route::get("/auth/{provider}/callback", function ($provider) {
-    $socialUser=Socialite::driver($provider)->user();
+Route::get("/auth/{provider}/callback",HandlerProviderCallback::class)->name("socialite.callback");
 
-    // Look for a user in your database with the same email
-    $user = User::where('email', $socialUser->getEmail())->first();
-    $rol = $user->getRoleNames()->first();
-    info("fortifyServiceProvider->redirectTo($rol)");
-    switch ($rol) {
-        case 'admin':
-            return '/admin';
-        case'teacher':
-            return '/teacher';
-        case 'student':
-            return '/student';
-    }
-    return ("/");
-
+Route::get('/auth/redirect', function () {
+   return Socialite::driver('google')->redirect();
 });
-
 //Fortify::loginView([CustomAuthenticatedSessionController::class, 'create']);
+
 
 
 
@@ -51,7 +39,7 @@ Route::get('/dashboard', function () {
 Route::get("set_lang", \App\Http\Controllers\LanguageController::class);
 
 //Route::post('/login', [CustomAuthenticatedSessionController::class, 'store']);
-Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::post('/logout', [\App\Http\Controllers\Auth\CustomAuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::middleware(['auth','role.redirect'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');

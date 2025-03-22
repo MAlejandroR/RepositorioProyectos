@@ -27,12 +27,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ]);
         $user->assignRole('admin');
-        $user=User::factory()->create([
-            'name' => 'Manuel Romero',
-            'email' => 'manuel.romero@cpilosenlaces.com',
-            'password' => bcrypt('12345678'),
-        ]);
-        $user->assignRole('teacher');
+//        $user=User::factory()->create([
+//            'name' => 'Manuel Romero',
+//            'email' => 'manuel.romero@cpilosenlaces.com',
+//            'password' => bcrypt('12345678'),
+//        ]);
+//        $user->assignRole('teacher');
 
     }
 }
