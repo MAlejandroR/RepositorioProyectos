@@ -17,12 +17,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 //        $middleware->append(\App\Http\Middleware\HandleLanguage::class);
+//        $middleware->web(append: [
+//          \App\Http\Middleware\EnsureOtpIsVerified::class,
+//        ]);
         $middleware->alias([
-            'role.redirect'=>RedirectBasedOnRoleMiddleware::class
+            'role.redirect'=>RedirectBasedOnRoleMiddleware::class,
+            'otp.verified'=>\App\Http\Middleware\EnsureOtpIsVerified::class
         ]);
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
-            RedirectBasedOnRoleMiddleware::class,
+//            RedirectBasedOnRoleMiddleware::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 

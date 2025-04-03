@@ -6,6 +6,10 @@ import { createPinia } from 'pinia';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = '/'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 

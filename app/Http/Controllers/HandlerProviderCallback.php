@@ -6,50 +6,84 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
-
-
+use App\Services\OtpService;
 
 class HandlerProviderCallback extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Handle the social login callback.
+     *
+     * @param string $provider The social provider (e.g., 'google', 'github', 'slack').
      */
     public function __invoke(string $provider)
     {
-        $solciaUser=Socialite::driver($provider)->stateless()->user();
-
-        $user=User::where("email", $solciaUser->getEmail())->first();
-        if (!$user) {
-            $user=User::create(
-                ["name" =>$solciaUser->getName(),
-                 "email"=>$solciaUser->getEmail(),
-                 "password" => Hash::make(Str::random(16)),
-                ]);
-            // Assign role based on email
-            $user->sendEmailVerificationNotification(); //
-
-            $email=$user->email;
-
-            if ($email === 'admin@gmail.com') {
-                $role='admin';
-            } elseif (Str::endsWith($email, '@cpilosenlaces.com')) {
-                $role='teacher';
-            } else {
-                $role='student';
-            }
-
-            $user->assignRole($role); // Spatie
-        }
+        $socialUser = $this->getSocialUser($provider);
+        $user = $this->findOrCreateUser($socialUser);
 
         Auth::login($user);
 
-        $rol=$user->getRoleNames()->first();
+        return $this->redirectByRole($user);
+    }
+
+    /**
+     * Get the user data from the social provider.
+     */
+    private function getSocialUser(string $provider)
+    {
+
+        return Socialite::driver($provider)->stateless()->user();
+    }
+
+    /**
+     * Find existing user or create a new one.
+     */
+    private function findOrCreateUser($socialUser): User
+    {
+        $user = User::where('email', $socialUser->getEmail())->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name' => $socialUser->getName(),
+                'email' => $socialUser->getEmail(),
+                'password' => Hash::make(Str::random(16)),
+            ]);
+
+            app(OtpService::class)->sendOtp($user);
 
 
-        // al final del método
-        return Inertia::location(match ($rol) {
+            $this->assignRoleByEmail($user);
+        }
+
+        return $user;
+    }
+
+    /**
+     * Assign a role to the user based on email.
+     */
+    private function assignRoleByEmail(User $user): void
+    {
+        $email = $user->email;
+
+        $role = match (true) {
+            $email === 'admin@gmail.com' => 'admin',
+            Str::endsWith($email, '@cpilosenlaces.com') => 'teacher',
+            default => 'student',
+        };
+
+        $user->assignRole($role);
+    }
+
+    /**
+     * Redirect user based on role.
+     */
+    private function redirectByRole(User $user)
+    {
+        $role = $user->getRoleNames()->first();
+
+
+        return Inertia::location(match ($role) {
             'admin' => '/admin',
             'teacher' => '/teacher',
             'student' => '/student',

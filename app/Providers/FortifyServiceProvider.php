@@ -16,7 +16,7 @@ use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use App\Models\User;
-
+use Inertia\Inertia;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -33,6 +33,17 @@ class FortifyServiceProvider extends ServiceProvider
     {
         info("FortifyServiceProvider->boot");
         info(auth()->user());
+
+        //Establecer la pantalla en caso de logín
+// 👤 Vista personalizada para el login
+        Fortify::loginView(function () {
+            return Inertia::render('Welcome');
+        });
+
+        Fortify::registerView(function () {
+           return Inertia::render('Welcome');
+        });
+
 
         //Cuando me registro
         Fortify::createUsersUsing(CreateNewUser::class);
@@ -89,6 +100,7 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
         */
+//        $this->app->instance(LoginResponse::class, new CustomLoginResponse());
 
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request)

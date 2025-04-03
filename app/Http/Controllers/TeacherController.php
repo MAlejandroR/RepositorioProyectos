@@ -9,6 +9,7 @@ class TeacherController extends Controller
 {
     //
     public function index(){
+        dd("TeacherController@index");
         return Inertia::render('Dashboard/Teacher/Index');
     }
 }

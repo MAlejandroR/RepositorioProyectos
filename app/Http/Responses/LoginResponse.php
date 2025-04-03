@@ -15,6 +15,9 @@ class LoginResponse implements  LoginResponseContract
     }
      public function toResponse($request){
         $user = auth()->user();
+        if (!user->is_verified){
+            return redirect('/verify-code');
+        }
         $rol = $user->getRoleNames()->first();
         info("LoginResponse@toReponse user- $user->name- rol -$rol- ");
         return match ($rol) {
