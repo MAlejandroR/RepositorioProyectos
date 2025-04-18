@@ -5,7 +5,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Register from "@/Pages/Auth/Register.vue";
 import {__} from "@/Hooks/useTranslation.js";
-import {useForm} from "@inertiajs/vue3";
+import { useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
 
@@ -28,14 +28,16 @@ const submit = () => {
     console.log(form.post)
     try {
         form.post('login', {
+
             preserveScroll: true,
-            onSuccess: () => console.log('Login successful'),
-            onError: () => console.log('Error during login')
+            onSuccess: (page) =>{
+                console.log('Login successful');
+            } ,
+            onError: () => console.log('Error during login'),
         });
     }catch(error){
         console.log ("Login.submit error" );
         console.log (error );
-
     }
 };
 

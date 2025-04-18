@@ -1,5 +1,180 @@
 models:
-  # ...
+
+  User:
+    id: bigIncrements
+    name: string
+    email: string unique
+    email_verified_at: nullable timestamp
+    password: string:255
+    role: enum:admin,teacher,student
+    remember_token: nullable string:100
+    timestamps: true
+    relationships:
+      hasMany:
+        - Enrollment
+        - Project # only for teachers
+
+  Cycle:
+    id: bigIncrements
+    name: string
+    family: string
+    timestamps: true
+    relationships:
+      hasMany:
+        - Enrollment
+        - Project
+
+  Enrollment:
+    id: bigIncrements
+    user_id: id foreign:users
+    cycle_id: id foreign:cycles
+    timestamps: true
+    relationships:
+      belongsTo:
+        - User
+        - Cycle
+      hasOne:
+        - Project
+
+  Project:
+    id: bigIncrements
+    title: string
+    description: text
+    enrollment_id: id foreign
+    teacher_id: id foreign:users
+    timestamps: true
+    relationships:
+      belongsTo:
+        - Enrollment
+        - User
 
 controllers:
-  # ...
+
+  CycleController:
+    index:
+      query: all
+      response: cycles
+    show:
+      find: id
+      response: cycle
+    store:
+      validate: name, family
+      save: cycle
+      response: cycle
+    update:
+      validate: name, family
+      find: id
+      update: cycle
+      response: cycle
+    destroy:
+      find: id
+      delete: cycle
+      response: cycle
+
+  StudentController:
+    index:
+      query: where:role=student
+      response: users
+    show:
+      find: id
+      response: user
+    update:
+      validate: name, email
+      find: id
+      update: user
+      response: user
+    destroy:
+      find: id
+      delete: user
+      response: user
+
+  TeacherController:
+    index:
+      query: where:role=teacher
+      response: users
+    show:
+      find: id
+      response: user
+    update:
+      validate: name, email
+      find: id
+      update: user
+      response: user
+    destroy:
+      find: id
+      delete: user
+      response: user
+
+  EnrollmentController:
+    index:
+      query: all
+      response: enrollments
+    show:
+      find: id
+      response: enrollment
+    store:
+      validate: user_id, cycle_id
+      save: enrollment
+      response: enrollment
+    destroy:
+      find: id
+      delete: enrollment
+      response: enrollment
+
+  ProjectController:
+    index:
+      query: all
+      response: projects
+    show:
+      find: id
+      response: project
+    store:
+      validate: title, description, enrollment_id, teacher_id
+      save: project
+      response: project
+    update:
+      validate: title, description, teacher_id
+      find: id
+      update: project
+      response: project
+    destroy:
+      find: id
+      delete: project
+      response: project
+
+seeders:
+  User, Cycle, Enrollment, Project
+
+tests:
+
+  Cycle:
+    index:
+    show:
+    store:
+    update:
+    destroy:
+
+  Enrollment:
+    index:
+    show:
+    store:
+    destroy:
+
+  Project:
+    index:
+    show:
+    store:
+    update:
+    destroy:
+
+  Student:
+    index:
+    show:
+    update:
+    destroy:
+
+  Teacher:
+    index:
+    show:
+    update:
+    destroy:

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\VerificationEmail;
 use Illuminate\Http\Request;
+use App\Models\EmailVerification;
 
 
 class EmailVerificationController extends Controller
@@ -44,7 +45,8 @@ class EmailVerificationController extends Controller
             ->where('expires_at', '>', now())
             ->first();
 
-
+        info ("EmailVerificationController@verifyCode");
+        info ($record);
 
         if (!$record) {
             return response()->json(['message' => 'Código inválido o caducado'], 422);

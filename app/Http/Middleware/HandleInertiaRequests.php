@@ -7,6 +7,8 @@ use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
+
+
     /**
      * The root template that's loaded on the first page visit.
      *
@@ -36,6 +38,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $this->info();
+        info("HeandleInsertiaRequest@share");
 
         return array_merge(parent::share($request), [
             'translate' => function () {

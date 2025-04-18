@@ -20,6 +20,7 @@ const error = ref(null)
 
 const verifyCode = async () => {
     try {
+        console.log("estoy e  verifyCode")
         const response = await axios.post('/email/verify-code', { code: code.value })
         router.visit('/dashboard') // redirige si es correcto
     } catch (err) {

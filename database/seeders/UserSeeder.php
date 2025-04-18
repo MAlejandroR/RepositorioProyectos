@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -14,25 +13,23 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-//        $user=User::factory()->create([
-//            'name' => 'Manuel Romero',
-//            'email' => 'manuelromeromiguel@gmail.com',
-//            'password' => bcrypt('12345678'),
-//        ]);
-//        $user->assignRole('student');
-        $user=User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'),
-        ]);
-        $user->assignRole('admin');
-//        $user=User::factory()->create([
-//            'name' => 'Manuel Romero',
-//            'email' => 'manuel.romero@cpilosenlaces.com',
-//            'password' => bcrypt('12345678'),
-//        ]);
-//        $user->assignRole('teacher');
+        // Asegurarse de que el rol 'admin' existe
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+
+        // Crear usuario administrador
+        $user = User::firstOrCreate(
+            ['email' => 'admin@gmail.com'], // Clave única para evitar duplicados
+            [
+                'name' => 'admin',
+                'password' => bcrypt('12345678'),
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Asignar rol si aún no lo tiene
+        if (!$user->hasRole('admin')) {
+            $user->assignRole($adminRole);
+        }
 
     }
 }

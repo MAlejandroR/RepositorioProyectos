@@ -24,8 +24,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'role.redirect'=>RedirectBasedOnRoleMiddleware::class,
             'otp.verified'=>\App\Http\Middleware\EnsureOtpIsVerified::class
         ]);
+
+
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
+//            \App\Http\Middleware\ConditionalInertiaMiddleware::class,
 //            RedirectBasedOnRoleMiddleware::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);

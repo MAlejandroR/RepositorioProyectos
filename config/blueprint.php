@@ -21,12 +21,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | Blueprint promotes following Laravel conventions. As such, it generates
-    | components under the default namespaces. For example, models are under
+    | widgets under the default namespaces. For example, models are under
     | the `App` namespace. However, you may configure Blueprint to use
-    | your own custom namespace when generating these components.
+    | your own custom namespace when generating these widgets.
     |
     */
     'models_namespace' => 'Models',
+
 
     'controllers_namespace' => 'Http\\Controllers',
 
@@ -39,13 +40,14 @@ return [
     | Application Path
     |--------------------------------------------------------------------------
     |
-    | By default, Blueprint will save the generated application components
+    | By default, Blueprint will save the generated application widgets
     | under the files under the `app` folder. However, you may configure
     | Blueprint  to save these generated component under a custom path.
     |
     */
     'app_path' => 'app',
     'model_path'=>'app/Models',
+    'controller_path'=>'app/Http/Models',
 
     /*
     |--------------------------------------------------------------------------

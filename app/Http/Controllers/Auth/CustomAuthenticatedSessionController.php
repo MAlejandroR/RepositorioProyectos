@@ -56,6 +56,7 @@ class CustomAuthenticatedSessionController extends BaseAuthenticatedSessionContr
      */
     public function store(LoginRequest $request)
     {
+        info ("Estoy en CustomAuthenticatedSessionController, store (espero login)");
         return $this->loginPipeline($request)->then(function ($request) {
             return app(LoginResponse::class);
         });

@@ -40,6 +40,7 @@ class OtpService
             ->where('expires_at', '>', now())
             ->first();
 
+        dd ($record);
 
 
         if (!$record) {
