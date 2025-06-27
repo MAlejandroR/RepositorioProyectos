@@ -1,0 +1,1 @@
+## Instalación```bashcomposer require pestphp/pest --dev./vendor/bin/pest --initphp artisan pest:install```## Ejecutar```bashphp artisan test```

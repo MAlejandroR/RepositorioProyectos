@@ -9,7 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 
 
-class SendOtpCodeMain extends Mailable
+class   SendOtpCodeMain extends Mailable
 {
     use Queueable, SerializesModels;
 

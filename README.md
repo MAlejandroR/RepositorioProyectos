@@ -2,6 +2,11 @@
 
 Un fichero de requisitos está en (./documenacion/requisitos.docs)
 
+
+# Índice
+   
+[Autenticacion: login](./Documentacion/auth.md)
+
 # Uso de Librerías
 Instala el paquete del cliente de Google: 
 Puedes incluir este paquete en tu proyecto Laravel mediante Composer. 

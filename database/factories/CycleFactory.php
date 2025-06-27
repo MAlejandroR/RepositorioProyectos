@@ -22,7 +22,6 @@ class CycleFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'family' => fake()->word(),
         ];
     }
 }

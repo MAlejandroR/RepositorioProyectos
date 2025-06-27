@@ -17,22 +17,57 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+//    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required()->maxLength(255),
+                Forms\Components\TextInput::make('surname_1')->required()->maxLength(255),
+                Forms\Components\TextInput::make('surname_2')->email()->required()->maxLength(255),
+                Forms\Components\TextInput::make('email')->required()->maxLength(255),
+                Forms\Components\Select::make('departament')
+                    ->relationship('departament', 'id')
             ]);
+
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->wrap(), // permite salto de línea para evitar que se estire
+                Tables\Columns\TextColumn::make('surname_1')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->wrap(), // permite salto de línea para evitar que se estire
+                Tables\Columns\TextColumn::make('surname_2')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->wrap(), // permite salto de línea para evitar que se estire
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->wrap(), // permite salto de línea para evitar que se estire
+                Tables\Columns\TextColumn::make('departament')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->wrap(), // permite salto de línea para evitar que se estire
                 //
             ])
+                //
+
             ->filters([
                 //
             ])
@@ -60,5 +95,15 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+    public static function canViewAny(): bool
+    {
+
+        return auth()->user()->hasRole(['admin']);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasRole(['admin']);
     }
 }

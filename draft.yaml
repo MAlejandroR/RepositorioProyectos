@@ -1,18 +1,20 @@
 models:
-
   User:
     id: bigIncrements
     name: string
     email: string unique
     email_verified_at: nullable timestamp
     password: string:255
-    role: enum:admin,teacher,student
     remember_token: nullable string:100
     timestamps: true
     relationships:
       hasMany:
         - Enrollment
         - Project # only for teachers
+  Family:
+    id: bigIncrements
+    name: string
+    timestamps: true
 
   Cycle:
     id: bigIncrements
@@ -23,7 +25,6 @@ models:
       hasMany:
         - Enrollment
         - Project
-
   Enrollment:
     id: bigIncrements
     user_id: id foreign:users
@@ -35,7 +36,6 @@ models:
         - Cycle
       hasOne:
         - Project
-
   Project:
     id: bigIncrements
     title: string
@@ -47,7 +47,15 @@ models:
       belongsTo:
         - Enrollment
         - User
-
+  Teacher:
+    id: bigIncrements
+    name: string
+    email: string unique
+    mail_verified_at: nullable timestamp
+    password: string:255
+    remember_token: nullable string:100',
+    timestamps:
+                                                                                                                                                                                    hasMany: 'Enrollment Project'
 controllers:
 
   CycleController:
@@ -127,52 +135,47 @@ controllers:
       response: projects
     show:
       find: id
-      response: project
+      response: projects
     store:
       validate: title, description, enrollment_id, teacher_id
-      save: project
-      response: project
+      save: projects
+      response: projects
     update:
       validate: title, description, teacher_id
       find: id
-      update: project
-      response: project
+      update: projects
+      response: projects
     destroy:
       find: id
-      delete: project
-      response: project
+      delete: projects
+      response: projects
 
 seeders:
   User, Cycle, Enrollment, Project
 
 tests:
-
   Cycle:
     index:
     show:
     store:
     update:
     destroy:
-
   Enrollment:
     index:
     show:
     store:
     destroy:
-
   Project:
     index:
     show:
     store:
     update:
     destroy:
-
   Student:
     index:
     show:
     update:
     destroy:
-
   Teacher:
     index:
     show:

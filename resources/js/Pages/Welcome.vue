@@ -1,30 +1,55 @@
 <script setup>
 import { Head, usePage } from '@inertiajs/vue3';
 import Login from "@/Pages/Auth/Login.vue";
-import { defineProps } from "vue";
+import { defineProps, onMounted } from "vue";
 import DropDownLang from "@/Components/DropDown-lang.vue";
 import Register from "@/Pages/Auth/Register.vue";
 import { ref } from "vue";
 import { __ } from "@/Hooks/useTranslation.js";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Banner from "@/Components/Banner.vue";
+import { useTranslationStore } from '@/stores/translationsStore'; // 👈 Correcto
+
 
 const showModal = ref(false);
 
+const {translate, list_of_lang, lang}=usePage().props;
+
 const datos = defineProps({
-    translate: Object,
-    list_of_lang: Object,
     departaments: Array
+    }
+);
+
+
+// console.log("sessiones " + usePage().flash);
+// console.log("Departamentos  " + datos.departaments);
+// console.log("Listado de lenguajes ");
+ console.log( "datos");
+ console.log( datos);
+// console.log(`Wellcome.vue l-17 showmodal ${showModal.value}`);
+// console.log(datos.translate);
+
+const translationStore = useTranslationStore(); // 👈 Muy importante, crear la instancia
+
+// 👇 cuando el componente se monte
+onMounted(() => {
+    if (translate) {
+        console.log("Actualizando store de traducciones");
+         translationStore.updateTranslations(translate);
+    } else {
+        console.log("datos.translate está vacío o undefined");
+    }
 });
-console.log("sessiones " + usePage().flash);
-console.log("Departamentos  " + datos.departaments);
-console.log("Listado de lenguajes " + datos.list_of_lang);
-console.log(`Wellcome.vue l-17 showmodal ${showModal.value}`);
+
 
 function updateShowModal(newValue) {
     console.log(`En Welcome update show modal a ${newValue}`);
     showModal.value = newValue;
 }
+
+// const lang = usePage().props.lang;
+
+
 </script>
 
 <template>
@@ -46,7 +71,7 @@ function updateShowModal(newValue) {
          items-center bg-gray-100 rounded-3xl p-5">
             <div class="self-stretch flex justify-between">
                 <img class="w-1/2" src="/images/logo.png" alt="logo Enlaces">
-                <DropDownLang :list_of_lang="list_of_lang" />
+                <DropDownLang :list_of_lang="list_of_lang" :lang="lang" />
             </div>
 
             <div class="flex justify-center items-center h-full">

@@ -1,0 +1,1 @@
+## Personalizar el Mail*Se trata de que el mensaje que se envía al usuario (validar el correo o bien un otp u otro elemento (no sé cuál podría ser))1.- Creamos un **mailabel** con vista* **Mailable** es una clase que representa un correo que queremos enviar; Crear un mailable con vista (la vista es la página que se va a enviar)```php```

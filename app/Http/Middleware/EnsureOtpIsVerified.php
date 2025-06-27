@@ -17,8 +17,14 @@ class EnsureOtpIsVerified
     {
 
         // Si el usuario no ha verificado su correo (por OTP)
+        info("EnsureOtpIsVeriefied@handle Middleware");
 
         if (auth()->check()){
+            // TOdo REvisar esto.
+            //Si el usuario ya se registró como admin. o student, le envío a su ruta
+
+
+
             dump("EnsureOtpVerified  entro en el 1  if auth->check");
             if (!(auth()->user()->otp_verified)) {
                 dump("EnsureOtpVerified  entro en el 2 if auth->user ");

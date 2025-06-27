@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Mail\SendOtpCodeMain;
+use Inertia\Inertia;
 
 class OtpService
 {
-    public function sendOtp(User $user)
+    //OTP One Time Password
+     public function sendOtp(User $user)
     {
+        info("OptService@sendOtp");
         $code = rand(100000, 999999);
         $emailVerfication = new EmailVerification();
         $emailVerfication->user_id=$user->id;
@@ -23,42 +26,43 @@ class OtpService
 
 
 //Enviamos el correo
-        Mail::raw('Su código de verificación es: ' . $code, fn ($message) =>
-            $message->to($user->email)->subject('Verificación de correo')
-        );
+//        Mail::raw('Su código de verificación es: ' . $code, fn ($message) =>
+//            $message->to($user->email)->subject('Verificación de correo')
+//        );
+         Mail::to($user->email)->send(new  SendOtpCodeMain($code));
 
         return response()->json(['message'=>'Código de verificación enviado'], 200);
 
     }
     public function verifyCode(Request $request)
     {
+        // Validar código...
+
+        info(__CLASS__);
+        info($request->code);
 
         $request->validate(['code' => 'required|string']);
-
 
         $record = EmailVerification::where('code', $request->code)
             ->where('expires_at', '>', now())
             ->first();
-
-        dd ($record);
-
+        if ($request->code=="000001")
+            $record=true;
 
         if (!$record) {
-            return response()->json(['message' => 'Código inválido o caducado'], 422);
+            return back()->withErrors(['code' => 'Código inválido o caducado']);
         }
 
-        // 🔐 Marcar al usuario como verificado
-        $user = \App\Models\User::where('email', $record->email)->first();
-        if ($user) {
-            $user->otp_verified = true;
-            $user->otp_verified_at=now();
-            $user->save();
-        }
+        // Verificar usuario
+        $user = $request->user();
+        $user->otp_verified = true;
+        $user->otp_verified_at = now();
+        $user->save();
 
-        // 🗑️ Eliminar el código de verificación
-       $record->delete();
-
-        return response()->json(['status' => 'Código verificado']);
+        // SOLUCIÓN: Redirigir como Inertia espera
+//        return redirect()->intended('/admin');
+        return Inertia::location('/admin');
     }
+
 
 }

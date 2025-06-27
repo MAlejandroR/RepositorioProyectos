@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('surname_1')->nullable();
+            $table->string('surname_2')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean("otp_verified")->default(false);
-            $table->string('password');
+            $table->timestamp('otp_verified_at')->nullable();
+            $table->string('password')->nullable(); //Cuando importo de csv no habrá
+            //NExt el usuario deberá de aportar la primera vez
             $table->string('departament')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

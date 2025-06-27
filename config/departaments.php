@@ -1,8 +1,21 @@
 <?php
-return[
-    "Informática",
-    "Image",
-    "Comercio",
+return [
+    "INFORMÁTICA" => [
+        "SISTEMAS Y APLICACIONES INFORMÁTICAS",
+        "INFORMATICA",
+    ],
+    "COMERCIO Y MARKETING"=>[
+        "ORGANIZACION Y GESTION COMERCIAL",
+        "PROCESOS COMERCIALES"
+    ],
+    "IMAGEN Y SONIDO"=>[
+        "TÉCNICAS Y PROCEDIMIENTOS DE IMAGEN Y SONIDO",
+        "PROCESOS Y MEDIOS DE COMUNICACION",
+    ],
+
+
+    "FORMACION Y ORIENTACION LABORAL",
+    "ORIENTACIÓN EDUCATIVA",
     "Dirección y Jefatura",
     "Otros"
 ];

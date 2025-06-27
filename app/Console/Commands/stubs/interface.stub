@@ -1,0 +1,9 @@
+// interface.stub
+<?php
+
+namespace {{ namespace }};
+
+interface {{ class }}
+{
+
+}

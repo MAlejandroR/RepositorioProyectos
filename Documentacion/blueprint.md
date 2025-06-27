@@ -1,0 +1,1 @@
+## FicheroCreo el fichero con ayuda del chat.Lo ejecuto````php artisan blueprint:build ````Muevo y actualizo los controladores por organización bajo una carpeta./Controller/ModelController, por tenermo más organizado

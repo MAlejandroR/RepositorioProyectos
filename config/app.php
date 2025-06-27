@@ -122,5 +122,11 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+    'debug_auth_admin' => env('DEBUG_AUTH_ADMIN', false),
+    'debug_auth' => env('DEBUG_AUTH', false),
+    'debug_auth_teacher' => env('DEBUG_AUTH_TEACHER', false),
+    'debug_auth_student' => env('DEBUG_AUTH_STUDENT', false),
+
+    'debug_middleware_insertia'=>env('DEBUG_MIDDLEWARE_INERTIA', false)
 
 ];

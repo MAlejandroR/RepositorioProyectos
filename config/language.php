@@ -6,12 +6,12 @@ return [
         'flag' => '🇪🇸',
     ],
     "fr" => [
-        'lang_name' => "Francés",
+        'lang_name' => "Français",
         'lc' => "fr_FR",
         'flag' => '🇫🇷',
     ],
     "en" => [
-        'lang_name' => "Inglés",
+        'lang_name' => "Engish",
         'lc' => "en_US",
         'flag' => '🇬🇧', // También puedes usar 🇺🇸 si prefieres "US English"
     ],

@@ -10,8 +10,11 @@ import {__} from "@/Hooks/useTranslation.js";
 
 const props = defineProps({
     status: String,
+    lang: String,
+    list_of_lang: Object
 });
 
+console.log(`Valor de lang ${props.lang}`);
 const form = useForm({});
 
 const submit = () => {
@@ -22,7 +25,7 @@ const title = computed(()=>__("Email verified"));
 const verificationLinkSent = computed(() => props.status === 'verification-link-sent');
 </script>
 <template>
-    <layout-basic :title="title">
+    <layout-basic :title="title" :lang="lang" :list_of_lang="list_of_lang">
 
         <AuthenticationCard>
             <h1 class="text-4xl flex justify-center w-full mb-8">{{__("Project Repository of CPI FP Los Enlaces.")}}</h1>

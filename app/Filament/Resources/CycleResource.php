@@ -64,4 +64,13 @@ class CycleResource extends Resource
             'edit' => Pages\EditCycle::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasRole(['admin']);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasRole(['admin']);
+    }
 }

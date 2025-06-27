@@ -1,10 +1,16 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
+import preset from './vendor/filament/support/tailwind.config.preset';
+
 
 /** @type {import('tailwindcss').Config} */
 export default {
+
     content: [
+        './app/Filament/**/*.php',
+        './resources/views/filament/**/*.blade.php',
+        './vendor/filament/**/*.blade.php',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
@@ -24,7 +30,8 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors:{
-                "header":"rgb(231, 117, 30)"
+                "header":"rgb(231, 117, 30)",
+                "main":"rgba(207,201,223,1)"
             },
             height:{
               "2v": "2vh",

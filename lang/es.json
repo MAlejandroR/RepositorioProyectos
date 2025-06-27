@@ -377,6 +377,25 @@
     "Users": "Ususarios",
     "Families":"Familias",
     "Cycles name":"Cycles",
-    "Or continue with":"O continúa con"
+    "Or continue with":"O continúa con",
+
+
+    "file.not.received": "no se ha recibido el fichero :file",
+    "file.not.found": "no se puede acceder al archivo temporal :file .",
+
+    "proyectos.importados": "se importaron :count proyectos correctamente",
+    "Gestión de Proyectos Escolares": "Gestión de Proyectos Escolares",
+    "Como profesor, puedes gestionar y supervisar los proyectos de tus estudiantes.": "Como profesor, puedes gestionar y supervisar los proyectos de tus estudiantes.",
+    "Supervisar proyectos de tus estudiantes": "Supervisar proyectos de tus estudiantes",
+    "Evaluar y dar retroalimentación": "Evaluar y dar retroalimentación",
+    "Seguir el progreso de los proyectos": "Seguir el progreso de los proyectos",
+    "Comunicarte con estudiantes y padres": "Comunicarte con estudiantes y padres",
+    "Administrar Proyectos": "Administrar Proyectos",
+    "Chat boot": "Chat boot",
+    "Realizar Consultas": "Realizar Consultas",
+    "Gestión de Datos": "Gestión de Datos",
+    "Proyecto": "Proyecto",
+    "Proyectos": "Proyectos",
+    "Verify Code": "Código de verificación"
 
 }

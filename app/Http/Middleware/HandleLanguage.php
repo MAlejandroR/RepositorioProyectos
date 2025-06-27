@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use function Ramsey\Uuid\v1;
 
 class HandleLanguage
 {
@@ -16,10 +17,14 @@ class HandleLanguage
     public function handle(Request $request, Closure $next): Response
     {
 
-        $lang =app()->getLocale();
-        session()->put("locale", $lang);
-//        info("1.-HandleLanguaje (middelware) app()->getLocale=   -$lang-");
 
+
+        $locale =$request->cookie('locale')??session()->get('locale')??config('app.locale');
+
+
+        info("Middleware HandleLanguage locale -$locale-");
+        app()->setLocale($locale);
+      //  info(session()->all());
         return $next($request);
     }
 }

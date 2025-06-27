@@ -13,8 +13,9 @@ class LanguageController extends Controller
     public function __invoke(Request $request)
     {
         $locale = $request->input("locale");
-//        info("1.-LanguageController.  locale -$locale-");
+        info("1.-LanguageController.  locale -$locale-");
         session()->put("locale", $locale);
+        info("2.-LanguageController. Valor de session()->get('locale') -".session()->get('locale')."-");
 //        info("2.-LanguageController. Valor de app()->getLocale -".app()->getLocale()."-");
 //       return redirect()->back();
 

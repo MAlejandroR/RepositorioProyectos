@@ -61,4 +61,13 @@ class EnrollmentResource extends Resource
             'edit' => Pages\EditEnrollment::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasRole(['admin']);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasRole(['admin']);
+    }
 }

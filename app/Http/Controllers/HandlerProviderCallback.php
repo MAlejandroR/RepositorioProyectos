@@ -19,10 +19,31 @@ class HandlerProviderCallback extends Controller
      */
     public function __invoke(string $provider)
     {
-        $socialUser = $this->getSocialUser($provider);
+//        $socialUser = $this->getSocialUser($provider);
+        //Solo voy a permitir con google o si quiero otros no habría problemas
+        //Pero para acceder a drive necesito el token de google.
+        $socialUser = Socialite::driver('google')->stateless()->user();
+
+
         $user = $this->findOrCreateUser($socialUser);
 
+
         Auth::login($user);
+
+
+        session([
+            'google_token' => [
+                'access_token' => $socialUser->token,
+                'refresh_token' => $socialUser->refreshToken,
+                'expires_in' => $socialUser->expiresIn,
+                'created' => time(),
+            ]
+        ]);
+
+        if ($redirect = session()->pull("redirect_after_google_auth")) {
+            return redirect($redirect);
+        }
+
 
         return $this->redirectByRole($user);
     }

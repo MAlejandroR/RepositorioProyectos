@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,30 +38,50 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $this->info();
-        info("HeandleInsertiaRequest@share");
+        //    $this->info();
+//        info("HeandleInsertiaRequest@share");
+        //     info('--- DEBUG LOCALE ---');
+        //     info('session(locale): ' . session()->get('locale'));
+        //     info('app()->getLocale(): ' . app()->getLocale());
+        //     info('config(app.locale): ' . config('app.locale'));
+        $lang = session()->get("locale") ?? app()->getLocale() ?? "es";
+        info(__CLASS__."@".__METHOD__.": url ".request()->url());
+
+        //     info("HandleInertiaRequest@share lang es -$lang- ");
+        $dir = "lang/$lang.json";
+//        info("HeandleInsertiaRequest@share dir -$dir-");
+
+        //     info("HandleInertiaRequest@share dir -$dir-");
+        //     info('--- /DEBUG LOCALE ---');
+        $translate = function () use ($dir) {
+            $text = file_get_contents(base_path($dir));
+            $text = json_decode($text, true);
+            return ($text);
+        };
+
+        $text = file_get_contents(base_path($dir));
+        $translate = json_decode($text, true);
+        debugMiddlewareInertia("HeandleInsertiaRequest@share fichero traducido -$dir-:");
+
+        $user = $request->user() ?? null;
+        $rol =  $request->user() ? $request->user()->getRoleNames()->first() : null;
+
+
+        info(__CLASS__."@".__METHOD__." rol : -$rol-");
+        info(__CLASS__."@".__METHOD__." lang : -$lang-");
+
+
 
         return array_merge(parent::share($request), [
-            'translate' => function () {
-                $lang = session()->get("locale") ?? app()->getLocale();
-                session()->put("locale", $lang);
-//                info("lang es -$lang- ");
-                $dir = "lang/$lang.json";
-//                info("dir $dir ");
-                $text = file_get_contents(base_path($dir));
-
-//                info("El fichero json es ".$text);
-                $text = json_decode($text, true);
-//                info("json decode es ".json_encode($text));
-                return ($text);
-
-            },
-            'user' => fn() => $request->user() ?? null,
-            'rol'=>fn () => $request->user()? $request->user()->getRoleNames()->first() : null,
+            'translate' => $translate,
+            'user' => $user,
+            'password_is_null' => fn () => Auth::check() && is_null(Auth::user()->password),
+            'rol' => $rol,
             'csrf_token' => csrf_token(),
             'list_of_lang' => config("language"),
+            'lang'=> $lang,
             'departaments' => config("departaments"),
-            'models'=>config("models.models"),
+            'models' => config("models.models"),
             'flash' => function () use ($request) {
                 return [
                     'message' => $request->session()->get('message'),
@@ -78,7 +99,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function info(): void
     {
-        info("HandleInertiaRequest@share");
-        info(config('models.'));
+        //   info("HandleInertiaRequest@share");
+        //   info(config('models.'));
     }
 }

@@ -14,6 +14,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use App\Http\Responses\CustomLoginResponse;
+use App\Http\Responses\CustomLoginResponse as CustomValidateRequest;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use App\Models\User;
@@ -32,49 +33,71 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        info("FortifyServiceProvider->boot");
-        info(auth()->user());
+        env('DEBUG_AUTH') && info('⚠️ Ejecutando FortifyServiceProvider boot');
+
+        env('DEBUG_AUTH_ADMIN') && info(__CLASS__."@".__METHOD__.": Con url ".request()->path());
+
+        env('DEBUG_AUTH') && info( request()->input());
 
 
         //Establecer la pantalla en caso de logín
 // 👤 Vista personalizada para el login
         Fortify::loginView(function () {
-            info("FortityServiceProvider->boot en loginView");
-            return Inertia::render('Welcome');
+            return Inertia::render('Welcome', [
+                'departaments' => config('departaments'),
+            ]);
         });
 
         Fortify::registerView(function () {
-            info("FortityServiceProvider->boot en registerView");
-           return Inertia::render('Welcome');
+            return Inertia::render('Welcome', [
+                'departaments' => config('departaments'),
+            ]);
         });
 
 
         //Cuando me registro
         Fortify::createUsersUsing(CreateNewUser::class);
+        env('DEBUG_AUTH') && info(__CLASS__."@".__METHOD__.": Next Create New User");
 
-        info("11");
+
+//        info("FortityServiceProvider->boot antes de  autenticateUsing");
+
         //Cuando me autentico, debo retornar el usuario autenticado o null
-        Fortify::authenticateUsing(function (Request $request) {
-            info("FortityServiceProvider->boot en autenticateUsing");
-            $user = User::where('email', $request->email)->first();
-            info("FortityServiceProvider->boot en autenticateUsing");
-            info ("-$user-");
+        Fortify::authenticateUsing(function (Request $request){
 
-            if ($user && Hash::check($request->password, $user->password)) {
-                // Credenciales válidas, puedes agregar más lógica aquí
+            env('DEBUG_AUTH') &&  info(__CLASS__."@".__METHOD__.": antes de buscar uusario");
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                return null; // Usuario no existe, fallar login
+            }
+            env('DEBUG_AUTH') && info(__CLASS__."@".__METHOD__.": Usuario encontrado $user");
+            // ✅ Si el usuario no tiene contraseña aún, lo dejamos pasar
+
+            if (is_null($user->password)) {
                 return $user;
             }
-            // Credenciales inválidas
+
+            // ✅ Si tiene contraseña, la verificamos como siempre
+            if (Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+
+
+//            if ($user && Hash::check($request->password, $user->password)) {
+//                // login ok (Credenciales válidas)
+//                // aqui añadiría si quiero hacer más cosas una vez logueado ok
+//                return $user;
+//            }
+            // Login no ok !!  Credenciales inválidas
             return null;
         });
-        info("12");
+
 
         //$this->app->instance(LoginResponse::class, new CustomLoginResponse());
 
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
-        info("13");
 
         RateLimiter::for('login', function (Request $request) {
 //            info("FortityServiceProvider->for(login)");
@@ -87,18 +110,37 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         //Verificación por password
+
+
+      /*
+          info("Antes de  confirmPasswordView");
+
         Fortify::confirmPasswordView(function () {
-//            info("te quiero ver");
+            info(__CLASS__."@".__METHOD__.": antes de inertia render");
             return Inertia::render('Auth/VerifyEmail');
-        });
-        info("14");
+
+        }
+        );
+*/
+
+        Fortify::verifyEmailView(function () {
+            env('DEBUG_AUTH_VERIFY_EMAIL') &&  info(__CLASS__."@".__METHOD__.": antes de inertia render");
+            return Inertia::render('Auth/VerifyEmail');
+
+        }
+        );
+
+
+        info(__CLASS__."@".__METHOD__.": Fin de método ");
+
+
 
     }
 
 
     public function register(): void
     {
-        info("FortifyServiceProvider->register");
+        //       info("FortifyServiceProvider->register");
 
         /*
         $this->app->instance(CustomLoginResponse::class, new class implements CustomLoginResponse {
@@ -110,6 +152,8 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
         */
+        $this->app->bind(LoginRequest::class,  CustomValidateRequest::class);
+
         $this->app->instance(LoginResponseContract::class, new CustomLoginResponse());
 
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
@@ -118,6 +162,8 @@ class FortifyServiceProvider extends ServiceProvider
                 return redirect('/');
             }
         });
+        $this->app->bind(AttemptToAuthenticate::class, CustomAttemptToAuthenticate::class);
+
 
     }
 

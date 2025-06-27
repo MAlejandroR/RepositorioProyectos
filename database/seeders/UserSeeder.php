@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
+use function Laravel\Prompts\password;
 
 class UserSeeder extends Seeder
 {
@@ -13,23 +13,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Asegurarse de que el rol 'admin' existe
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
-
-        // Crear usuario administrador
-        $user = User::firstOrCreate(
-            ['email' => 'admin@gmail.com'], // Clave única para evitar duplicados
+        $user=User::create(
             [
-                'name' => 'admin',
-                'password' => bcrypt('12345678'),
-                'email_verified_at' => now(),
-            ]
-        );
-
-        // Asignar rol si aún no lo tiene
-        if (!$user->hasRole('admin')) {
-            $user->assignRole($adminRole);
-        }
-
+                "name" => "Admin",
+                "email" => "a@a.com",
+                "password" => bcrypt("12345678")
+            ]);
+        $user->assignRole("Admin");
     }
 }

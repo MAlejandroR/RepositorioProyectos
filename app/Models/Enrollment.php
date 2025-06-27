@@ -28,10 +28,10 @@ class Enrollment extends Model
      * @var array
      */
     protected $casts = [
-        'user_id' => 'integer',
-        'cycle_id' => 'integer',
-        'user_cycle_id' => 'integer',
-    ];
+            'user_id' => 'integer',
+            'cycle_id' => 'integer',
+            'user_cycle_id' => 'integer',
+        ];
 
     public function userCycle(): BelongsTo
     {

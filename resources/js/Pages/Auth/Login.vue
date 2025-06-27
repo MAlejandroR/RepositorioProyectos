@@ -5,7 +5,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Register from "@/Pages/Auth/Register.vue";
 import {__} from "@/Hooks/useTranslation.js";
-import { useForm} from "@inertiajs/vue3";
+import { useForm,router} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
 
@@ -28,9 +28,23 @@ const submit = () => {
     console.log(form.post)
     try {
         form.post('login', {
-
             preserveScroll: true,
             onSuccess: (page) =>{
+                const rol = page.props.rol
+                console.log("Rol en login "+rol);
+                console.log("Usuario");
+                console.log(page.props.user);
+
+                if ((!page.props.user.email_verified_at)&&(rol != "admin")){
+                    console.log("Verify email");
+                    return router.visit("/email/verify");
+                }
+                switch (rol){
+                    case "admin": return router.visit("/admin")
+                    case "teacher":return router.visit("/teacher");
+                    case "student":return router.visit("/student");
+                    default: return router.visit("/");
+                }
                 console.log('Login successful');
             } ,
             onError: () => console.log('Error during login'),
@@ -64,7 +78,7 @@ const submit = () => {
             <TextInput type="password" name="password"
                        placeholder="password"
                        v-model="form.password"
-                       class="input input-bordered" required/>
+                       class="input input-bordered" />
             <InputLabel class="label">
                 <a href="#" class="label-text-alt link link-hover">{{ __("Forgot password?") }}</a>
             </InputLabel>

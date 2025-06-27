@@ -20,7 +20,8 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        info ("CreateNewUser @ create");
+        info(__CLASS__."@".__METHOD__);
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -28,32 +29,28 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
         info ("CreateNewUser - Next validate");
-
-
+        info(__CLASS__."@".__METHOD__.": Next Validator::make(\$input)");
         $user= User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
         // Asignar rol en función del dominio del correo electrónico
-        info(" CreateNewUser con email ". $input['email']);
+        info(__CLASS__."@".__METHOD__.": con email ". $input['email']);
+
         $emailDomain = substr(strrchr($input['email'], "@"), 1);
         info ("CreateNewUser -$emailDomain-");
 
         if ($emailDomain === 'cpilosenlaces.com') {
-            info ("Asignando teacher");
+            info(__CLASS__."@".__METHOD__.": Asignando Rol  teacher");
             $user->assignRole('teacher');
         } else {
-            info ("Asignando student");
+            info(__CLASS__."@".__METHOD__.": Asignando Rol  Student");
             $user->assignRole('student');
         }
-
-
         //Enviamos código de verificación
-        app(OtpService::class)->sendOtp($user);
+//        app(OtpService::class)->sendOtp($user);
        //
-
-
         return $user;
     }
 

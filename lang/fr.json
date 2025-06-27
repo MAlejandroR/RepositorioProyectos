@@ -376,5 +376,23 @@
     "Users": "Utilisateurs",
     "Families":"Familles",
     "Cycles name":"Cycles",
-    "Or continue with":"Ou continuez avec"
+    "Or continue with":"Ou continuez avec",
+    "file.not.found": "le fichier :file n'a pas été reçu",
+    "The temporary file cannot be accessed.": "le fichier temporaire est inaccessible.",
+    "proyectos.importados": ":count projets ont été importés avec succès",
+    "¡Bienvenido/a al repositorio de proyectos!":"Bienvenue dans le dépôt du projet !",
+    "Gestión de Proyectos Escolares": "Gestion des projets scolaires",
+    "Como profesor, puedes gestionar y supervisar los proyectos de tus estudiantes.": "En tant qu'enseignant, vous pouvez gérer et superviser les projets de vos élèves.",
+    "Supervisar proyectos de tus estudiantes": "Superviser les projets de vos élèves",
+    "Evaluar y dar retroalimentación": "Évaluer et donner du retour",
+    "Seguir el progreso de los proyectos": "Suivre l'avancement des projets",
+    "Comunicarte con estudiantes y padres": "Communiquer avec les élèves et les parents",
+    "Administrar Proyectos": "Gérer les projets",
+    "Chat boot": "Agent conversationnel",
+    "Realizar Consultas": "Faire des requêtes",
+    "Gestión de Datos": "Gestion des Données",
+    "Proyecto": "Projet",
+    "Proyectos": "Projets",
+    "Verify Code": "Code de vérification"
+
 }

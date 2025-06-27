@@ -38,6 +38,8 @@ class EmailVerificationController extends Controller
     public function verifyCode(Request $request)
     {
 
+        info ("EmailVerificationController@verifyCode");
+        info ($request->all());
         $request->validate(['code' => 'required|string']);
 
 
@@ -52,7 +54,7 @@ class EmailVerificationController extends Controller
             return response()->json(['message' => 'Código inválido o caducado'], 422);
         }
 
-        // 🔐 Marcar al usuario como verificado
+        // Marcar al usuario como verificado
         $user = \App\Models\User::where('email', $record->email)->first();
         if ($user) {
             $user->otp_verified = true;
@@ -60,7 +62,7 @@ class EmailVerificationController extends Controller
             $user->save();
         }
 
-        // 🗑️ Eliminar el código de verificación
+        // Eliminar el código de verificación
         $record->delete();
 
         return response()->json(['status' => 'Código verificado']);

@@ -6,14 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "algolia/algoliasearch-client-php": "^4.21",
         "filament/filament": "^3.3",
+        "google/apiclient": "^2.0",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/fortify": "^1.21",
         "laravel/framework": "^11.0",
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.15",
         "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.9",
+        "league/csv": "^9.24",
         "spatie/laravel-permission": "^6.17",
         "tightenco/ziggy": "^2.0"
     },
@@ -36,7 +40,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": ["app/helpers.php"]
     },
     "autoload-dev": {
         "psr-4": {
