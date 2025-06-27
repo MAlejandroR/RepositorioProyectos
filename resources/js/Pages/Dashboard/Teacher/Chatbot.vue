@@ -51,7 +51,7 @@ async function ask() {
                 </ul>
             </div>
             <div v-else class="mt-6">
-                <h3 class="text-lg font-semibold mb-2">No se han encontrado Proyectos </h3>
+                <h3 class="text-lg font-semibold mb-2">No se han encontrado Proyectos con el criterio indicado </h3>
             </div>
         </div>
     </AppLayout>
