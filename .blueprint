@@ -1,0 +1,44 @@
+created:
+    - app/Http/Controllers/CycleController.php
+    - app/Http/Controllers/StudentController.php
+    - app/Http/Controllers/TeacherController.php
+    - app/Http/Controllers/EnrollmentController.php
+    - app/Http/Controllers/ProjectController.php
+    - database/factories/UserFactory.php
+    - database/factories/CycleFactory.php
+    - database/factories/EnrollmentFactory.php
+    - database/factories/ProjectFactory.php
+    - database/factories/TeacherFactory.php
+    - database/migrations/2025_05_07_061359_create_users_table.php
+    - database/migrations/2025_05_07_061400_create_cycles_table.php
+    - database/migrations/2025_05_07_061401_create_enrollments_table.php
+    - database/migrations/2025_05_07_061402_create_projects_table.php
+    - database/migrations/2025_05_07_061403_create_teachers_table.php
+    - app/Models/User.php
+    - app/Models/Cycle.php
+    - app/Models/Enrollment.php
+    - app/Models/Project.php
+    - app/Models/Teacher.php
+    - database/seeders/UserSeeder.php
+    - database/seeders/CycleSeeder.php
+    - database/seeders/EnrollmentSeeder.php
+    - database/seeders/ProjectSeeder.php
+    - tests/Feature/Http/Controllers/CycleControllerTest.php
+    - tests/Feature/Http/Controllers/StudentControllerTest.php
+    - tests/Feature/Http/Controllers/TeacherControllerTest.php
+    - tests/Feature/Http/Controllers/EnrollmentControllerTest.php
+    - tests/Feature/Http/Controllers/ProjectControllerTest.php
+updated:
+    - routes/web.php
+models:
+    Ciclos: { name: string, familia_id: 'biginteger unsigned' }
+    EmailVerification: { user_id: 'biginteger unsigned', code: string, expires_at: timestamp }
+    Familia: { name: string }
+    Membership: { team_id: 'biginteger unsigned', user_id: 'biginteger unsigned', role: 'string nullable', is_verified: boolean }
+    Team: { user_id: 'biginteger unsigned', name: string, personal_team: boolean }
+    TeamInvitation: { team_id: 'biginteger unsigned', email: string, role: 'string nullable' }
+    User: { id: bigIncrements, name: string, email: 'string unique', email_verified_at: 'nullable timestamp', password: 'string:255', remember_token: 'nullable string:100', timestamps: timestamps, relationships: { hasMany: 'Enrollment Project' } }
+    Teacher: { id: bigIncrements, name: string, email: 'string unique', mail_verified_at: 'nullable timestamp', password: 'string:255', remember_token: "nullable string:100',", timestamps: { hasMany: 'Enrollment Project' } }
+    Cycle: { id: bigIncrements, name: string, family: string, timestamps: timestamps, relationships: { hasMany: 'Enrollment Project' } }
+    Enrollment: { id: bigIncrements, user_id: 'id foreign:users', cycle_id: 'id foreign:cycles', timestamps: timestamps, relationships: { belongsTo: 'User Cycle', hasOne: Project } }
+    Project: { id: bigIncrements, title: string, description: text, enrollment_id: 'id foreign', teacher_id: 'id foreign:users', timestamps: timestamps, relationships: { belongsTo: 'Enrollment User' } }
