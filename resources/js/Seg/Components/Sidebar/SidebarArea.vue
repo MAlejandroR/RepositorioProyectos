@@ -118,7 +118,7 @@ const menuGroups = ref([
                 route: '#',
                 children: [
                     {label: 'Form Elements', route: '/forms/form-elements'},
-                    {label: 'Form Layout', route: '/forms/form-layout'}
+                    {label: 'Form Layout', route: '/forms/form-layouts'}
                 ]
             },
             {

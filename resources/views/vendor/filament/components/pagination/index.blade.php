@@ -8,7 +8,7 @@
 @php
     use Illuminate\Contracts\Pagination\CursorPaginator;
 
-    $isRtl = __('filament-panels::layout.direction') === 'rtl';
+    $isRtl = __('filament-panels::layouts.direction') === 'rtl';
     $isSimple = ! $paginator instanceof \Illuminate\Pagination\LengthAwarePaginator;
 @endphp
 

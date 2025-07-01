@@ -14,7 +14,7 @@ const {title, lang, list_of_lang}=defineProps({
     list_of_lang: Object
 });
 
-console.log ("en layout-basic")
+console.log ("en layouts-basic")
 console.log("Listado de lenguajes "+list_of_lang);
 console.log("lenguajae  "+lang);
 

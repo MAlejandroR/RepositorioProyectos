@@ -27,47 +27,21 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-//        //Aquí estableceremos los recursos que serán en función del rol
-//        //De momento teacher puede acceder solo a projects
-//        //admin a todos
-//        $resources = [];
-//
-//        if (auth()->check()) {
-//            $user = auth()->user();
-//            if ($user->hasRole('admin')) {
-//                $resources = [
-//                    ProjectResource::class,
-//                    CycleResource::class .
-//                    EnrollmentResource::class,
-//                    UserResource::class
-//                ];
-//            }
-//            if ($user->hasRole('teahcer')) {
-//                $resources = [
-//                    ProjectResource::class
-//                ];
-//            }
-//        }
+
         info(__CLASS__." con user -".auth()->user()."-");
         return $panel
+            ->viteTheme('resources/css/filament/app.css')
             ->id('admin')
             ->path('admin')
+            ->brandLogo(asset('images/logo.png'))
             ->brandName(__('panel.project_repository'))
-            ->renderHook('panels::topbar.end', fn() => view('components.language-switcher'))
+            ->renderHook('panels::body.end', fn() =>view('components.filament.topbar-logo'))
+            ->renderHook('panels::body.start', fn() =>view('components.filament.topmenu'))
+//            ->renderHook('panels::topbar.start', fn() => view('components.filament.topbar-logo'))
+            ->renderHook('panels::topbar.end', fn() => view('components.filament.LanguageSwitcher'))
             ->colors([
                 'primary' => Color::Amber,
             ])
-//            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-//            ->when(auth()->check() && auth()->user()->hasRole('admin'), function ($panel) {
-//                info("en panel filament soy admin");
-//                return $panel->discoverResources(
-//                    in: app_path('Filament/Resources'),
-//                    for: 'App\\Filament\\Resources'
-//                );
-//            })
-//            ->resources([
-//                \App\Filament\Resources\ProjectResource::class,
-//            ])
             ->discoverResources(
                 in: app_path('Filament/Resources'),
                 for: 'App\\Filament\\Resources'
@@ -75,7 +49,8 @@ class AdminPanelProvider extends PanelProvider
 
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+//                Pages\Dashboard::class,
+            \App\Filament\Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -96,7 +71,6 @@ class AdminPanelProvider extends PanelProvider
                 ConditionalInertiaMiddleware::class,
             ])
             ->authMiddleware([Authenticate::class, \App\Http\Middleware\RestrictTeacherOnlyAdminProject::class]
-
             );
     }
 }

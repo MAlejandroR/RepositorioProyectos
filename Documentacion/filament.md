@@ -17,13 +17,16 @@ https://filamentphp.com/docs/3.x
 > * Widgets
 
 * Crear usuario
- No necesario, puedu usar un usuario del sistema, en mi caso un usuario con rol de admin
+ No necesario, puedo usar un usuario del sistema, en mi caso un usuario con rol de admin
  
 ```bash
 php artisan make:filament-user
 ```
 
 * Visualizando datos
-Para ello hay que completar en la clase del recurso correspondiente el mtétodo columns de la clase Table que retorna el método table
+Para ello hay que completar en la clase del recurso correspondiente el método columns de la clase Table que retorna el método table
  
 * 
+## El panel de administración
+
+* Gesionado por la clase ./app/Providers/Filament/AdminPanelProvider

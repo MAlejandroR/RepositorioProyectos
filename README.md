@@ -1,11 +1,20 @@
 # Aplicación de Repositorios de proyectos
 
+Aplicación de centro enfocada a gestionar la información de los proyectos de los diferentes ciclos.
+
+Objetivos:
+ * Tener un listado de proyectos
+ * Ver o acceder a los mismos
+ * Poder buscar proyectos según información de criterios previamente establecidos
+
 Un fichero de requisitos está en (./documenacion/requisitos.docs)
 
 
 # Índice
+
    
 [Autenticacion: login](./Documentacion/auth.md)
+[La administración con filament](./Documentacion/filament.md)
 
 # Uso de Librerías
 Instala el paquete del cliente de Google: 
