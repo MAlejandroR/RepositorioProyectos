@@ -18,7 +18,13 @@ class EnrollmentResource extends Resource
     protected static ?string $model = Enrollment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    public static  function getNavigationLabel(): string{
+        return __("Matrículas");
+    }
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Gestión de Datos');
+    }
     public static function form(Form $form): Form
     {
         return $form

@@ -13,16 +13,26 @@ class Dashboard extends Page
 
     protected static string $view = 'filament.pages.dashboard';
 
-    protected function getHeaderWidgets(): array
-    {
-        return [
+    protected static ?string $title = 'Admin';
 
-            \App\Filament\Widgets\ProjectStats::class
-        ];
-    }
+
+//    protected function getHeaderWidgets(): array
+//    {
+//        return [
+//
+//            \App\Filament\Widgets\ProjectStats::class
+//        ];
+//    }
 //    public function getLayout(): string{
 //        return "layouts.filament.";
 //    }
+    public function getHeading(): string
+    {
+        return __("Administración de repositorio de proyectos");
+    }
+    public static function getNavigationLabel(): string{
+        return __("Administración");
+    }
     public function getViewData(): array
     {
         return [

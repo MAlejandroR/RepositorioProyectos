@@ -160,7 +160,9 @@ class ProjectResource extends Resource
     {
         return auth()->user()->hasRole(['admin', 'teacher']);
     }
-
+    public static  function getNavigationLabel(): string{
+        return __("Proyectos");
+    }
     public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasRole(['admin', 'teacher']);

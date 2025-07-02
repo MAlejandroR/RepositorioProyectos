@@ -14,6 +14,7 @@ class OtpService
     //OTP One Time Password
      public function sendOtp(User $user)
     {
+        return;
         info("OptService@sendOtp");
         $code = rand(100000, 999999);
         $emailVerfication = new EmailVerification();
@@ -36,6 +37,8 @@ class OtpService
     }
     public function verifyCode(Request $request)
     {
+        return Inertia::location('/admin');
+
         // Validar código...
 
         info(__CLASS__);

@@ -14,16 +14,36 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CycleResource extends Resource
+{    public static function getNavigationGroup(): ?string
 {
+    return __('Gestión de Datos');
+}
     protected static ?string $model = Cycle::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    public static  function getNavigationLabel(): string{
+         return __("Ciclos Formativos");
+    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->label(__('Nombre del ciclo'))
+                    ->required()
+                    ->maxLength(255),
+
+                Forms\Components\TextInput::make('code')
+                    ->label(__('Código del ciclo'))
+                    ->required()
+                    ->maxLength(255),
+
+                Forms\Components\Select::make('family_id')
+                    ->label(__('Familia profesional'))
+                    ->relationship('family', 'name') // Asume que el modelo Family tiene un campo 'name'
+                    ->searchable()
+                    ->preload()
+                    ->required(),
             ]);
     }
 
@@ -73,4 +93,5 @@ class CycleResource extends Resource
     {
         return auth()->user()->hasRole(['admin']);
     }
+
 }
