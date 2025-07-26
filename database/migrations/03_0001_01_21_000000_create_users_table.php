@@ -24,7 +24,18 @@ return new class extends Migration
             //NExt el usuario deberá de aportar la primera vez
             $table->string('departament')->nullable();
             $table->rememberToken();
+
+
+            //Un profesor tiene una especialidad que implica un departamento
+            //Profesor es un tipo de usuario por eso nullable
+            $table->foreignId("specialization_id")->constrained("specializations")->nullable();
+
+
+
+
+
             $table->foreignId('current_team_id')->nullable();
+
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
