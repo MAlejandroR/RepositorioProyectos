@@ -2,12 +2,21 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Teacher extends Model
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+
+class Teacher extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,9 +25,13 @@ class Teacher extends Model
      */
     protected $fillable = [
         'name',
+        'surname_1',
+        'surname_2',
         'email',
-        'mail_verified_at',
+        'email_verified_at',
         'password',
+        'departament',
+        "specialization_id"
     ];
 
     /**
@@ -37,6 +50,17 @@ class Teacher extends Model
      * @var array
      */
     protected $casts = [
-            'mail_verified_at' => 'timestamp',
-        ];
+        'email_verified_at' => 'timestamp',
+    ];
+
+    //La especialidad de un profesor
+
+
+    //Para obtener la especialización a la que pertenece un profesor
+    public function specialization(): BelongsTo
+    {
+        return $this->belongsTo(Specialization::class);
+    }
+
+
 }

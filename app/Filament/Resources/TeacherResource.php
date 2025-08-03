@@ -2,8 +2,8 @@
 
 namespace App\Filament\Clusters\Usuarios;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\TeacherResource\Pages;
+use App\Filament\Resources\TeacherResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,23 +12,17 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
-class UserResource extends Resource
+class TeacherResource extends Resource
 {
     protected static ?string $model = User::class;
 
-//    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+
+
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?int $navigationSort = 3;
+    protected static ?string $navigationParentItem = "Usuario";
     protected static ?string $cluster = Usuarios::class;
 
-    public static function getNavigationLabel(): string
-    {
-        return __("Usuarios");
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('Gestión de Datos');
-    }
 
     public static function form(Form $form): Form
     {
@@ -37,7 +31,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                ->label("Nombre")
+                    ->label("Nombre")
                 ,
                 Forms\Components\TextInput::make('surname_1')->required()->maxLength(255)->label("Apellido 1"),
                 Forms\Components\TextInput::make('surname_2')->required()->maxLength(255)->label("Apellido 2"),
@@ -46,7 +40,6 @@ class UserResource extends Resource
                     ->relationship('specialization', 'name')
                     ->label("Especialidad")
             ]);
-
     }
 
     public static function table(Table $table): Table
@@ -80,7 +73,6 @@ class UserResource extends Resource
                 //
             ])
             //
-
             ->filters([
                 //
             ])
@@ -104,25 +96,33 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Resources\UserResource\Pages\ListUsers::route('/'),
-            'create' => \App\Filament\Resources\UserResource\Pages\CreateUser::route('/create'),
-            'edit' => \App\Filament\Resources\UserResource\Pages\EditUser::route('/{record}/edit'),
+            'index' => \App\Filament\Resources\TeacherResource\Pages\ListTeachers::route('/'),
+            'create' => \App\Filament\Resources\TeacherResource\Pages\CreateTeacher::route('/create'),
+            'edit' => \App\Filament\Resources\TeacherResource\Pages\EditTeacher::route('/{record}/edit'),
         ];
-    }
 
-    public static function canViewAny(): bool
-    {
 
-        return auth()->user()->hasRole(['admin']);
-    }
-
-    public static function shouldRegisterNavigation(): bool
-    {
-        return auth()->user()->hasRole(['admin']);
     }
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->with(['specialization.family']);
+        return parent::getEloquentQuery()
+            ->whereHas('roles', function($query) {
+                $query->where('name', 'teacher');
+            });
+    }
+    public static function getModelLabel(): string
+    {
+        return 'Teacher'; // singular label
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Teachers'; // plural label
+    }
+    public static function getNavigationGroup(): string
+    {
+        return "Usuarios ";
+
     }
 }
