@@ -13,7 +13,7 @@ class CycleSeeder extends Seeder
      */
     public function run(): void
     {
-        $cycles = config("cycles");
+        $cycles = config("cycles_enlaces");//TODO Solo cargo los de los enlaces
         foreach ($cycles as $family=>$cycleList) {
 
             $family=Family::where('name', $family)->first();

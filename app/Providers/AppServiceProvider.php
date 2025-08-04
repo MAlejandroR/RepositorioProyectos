@@ -10,6 +10,12 @@ use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
 use Filament\Facades\Filament;
 use Laravel\Fortify\Contracts\RegisterResponse;
+use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Assets\Js;
+use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\Collection;
+
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -43,8 +49,16 @@ class AppServiceProvider extends ServiceProvider
         Filament::serving(function () {
             app()->setLocale(session('locale', config('app.locale')));
             // Cambia el nombre del panel actual
-            Filament::getCurrentPanel()->brandName(__('panel.project_repository'));        });
+            Filament::getCurrentPanel()->brandName(__('panel.project_repository'));
+            // Opción fácil:
+            FilamentAsset::register([
+//                Js::make('chart-js-plugins', Vite::asset('resources/js/filament-chart-js-plugins.js'))->module(),
+                Js::make('chart-js-plugins', Vite::asset('resources/js/filament-chart-js-plugins.js'))->module()
+            ]);
+        });
 
-        //
+        Collection::macro("normalize", fn()=>
+            $this->map(fn($value)=>strtoupper(iconv("UTF-8", "ASCII//TRANSLIT", $value))));
+
     }
 }

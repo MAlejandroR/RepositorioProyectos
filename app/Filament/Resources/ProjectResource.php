@@ -158,6 +158,12 @@ class ProjectResource extends Resource
 
     public static function canViewAny(): bool
     {
+
+        return auth()->user()->hasRole(['admin', 'teacher']);
+    }
+    public static function canCreate(): bool
+    {
+
         return auth()->user()->hasRole(['admin', 'teacher']);
     }
     public static  function getNavigationLabel(): string{

@@ -14,16 +14,21 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CycleResource extends Resource
-{    public static function getNavigationGroup(): ?string
 {
-    return __('Gestión de Datos');
-}
     protected static ?string $model = Cycle::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    public static  function getNavigationLabel(): string{
-         return __("Ciclos Formativos");
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Gestión de Datos');
     }
+
+    public static function getNavigationLabel(): string
+    {
+        return __("Ciclos Formativos");
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -53,7 +58,7 @@ class CycleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label($cicle_name)->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('family')->label('Family')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('family.name')->label('Departamento')->searchable()->sortable(),
 
             ])
             ->filters([
@@ -84,6 +89,7 @@ class CycleResource extends Resource
             'edit' => Pages\EditCycle::route('/{record}/edit'),
         ];
     }
+
     public static function canViewAny(): bool
     {
         return auth()->user()->hasRole(['admin']);

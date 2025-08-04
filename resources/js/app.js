@@ -8,6 +8,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import axios from 'axios'
 
+
+
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = '/'
 

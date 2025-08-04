@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Clusters\Usuarios;
+namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
@@ -17,9 +17,10 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
 //    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationIcon = 'heroicon-o-user';
-    protected static ?string $cluster = Usuarios::class;
-
+    protected static ?string $navigationIcon = 'heroicon-o-user-plus';
+    protected static ?string $navigationGroup = 'Gestión de Datos';
+    protected static ?string $navigationLabel ="Usuarios ▾";
+/*
     public static function getNavigationLabel(): string
     {
         return __("Usuarios");
@@ -29,7 +30,7 @@ class UserResource extends Resource
     {
         return __('Gestión de Datos');
     }
-
+*/
     public static function form(Form $form): Form
     {
         return $form

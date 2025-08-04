@@ -8,7 +8,6 @@
         <div class="w-2/3">
             <canvas id="cycles-chart"></canvas>
         </div>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -37,4 +36,5 @@
             });
         });
     </script>
+    </div>
 </x-filament::card>

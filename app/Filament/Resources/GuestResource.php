@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Clusters\Usuarios;
+namespace App\Filament\Resources;
 
 use App\Filament\Resources\GuestResource\Pages;
 use App\Filament\Resources\GuestResource\RelationManagers;
@@ -15,7 +15,10 @@ class GuestResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
-    protected static ?string $cluster = Usuarios::class;
+    protected static ?string $navigationGroup = 'Gestión de Datos';
+    protected static ?string $navigationParentItem = "Usuarios ▾";
+    protected static ?string $navigationLabel ="Usuario Invitado";
+
 
     public static function form(Form $form): Form
     {

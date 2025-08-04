@@ -31,9 +31,9 @@ return new class extends Migration
 
             // Relaciones existentes
             //Todo revisar el concepto nullable aquí, de momento para importar csv lo dejo así.
-            $table->foreignId('enrollment_id')->nullable()->constrained();
-            $table->foreignId('teacher_id')->nullable()->constrained('users');
-            $table->foreignId('enrollment_user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained(); //Alumno que hace este proyectos
+            $table->foreignId('teacher_id')->nullable()->constrained('users'); //Teacher tutor del proyecto
+//            $table->foreignId('enrollment_user_id')->nullable();
 
             $table->timestamps();
         });

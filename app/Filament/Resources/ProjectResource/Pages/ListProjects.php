@@ -17,8 +17,10 @@ class ListProjects extends ListRecords
 
     protected function getHeaderActions(): array
     {
+
+        //return dd("Estoy en jetHeaderActions")
         return [
-            Actions\CreateAction::make(),
+//            Actions\CreateAction::make(),
             Actions\Action::make('importCsv')
                 ->label(__('Import CSV'))
                 ->form([
@@ -32,13 +34,12 @@ class ListProjects extends ListRecords
                         ->preserveFilenames(), // Para que el nombre sea predecible (opcional)
                 ])
                 ->action(function (array $data) {
-                    $uploadedFiles = $data['files']??[]; //Recojo todos los ficheros
-                    $totalImported=0;
-                    $totalSkipped=0;
+                    $uploadedFiles = $data['files'] ?? []; //Recojo todos los ficheros
+                    $totalImported = 0;
+                    $totalSkipped = 0;
 
 
                     foreach ($uploadedFiles as $nameFile) {
-
 
 
                         //Obtenemos el array con los datos del formulario
@@ -82,8 +83,9 @@ class ListProjects extends ListRecords
                         $headers = $csvFile->getHeader();
 
 
-//                    $csvFile = array_map("str_getcsv", file($file));
+//        BUENISIMA ESTO ...            $csvFile = array_map("str_getcsv", file($file));
 //                    $headers = array_shift($csvFile); //Quitamos primera fila
+
                         $imported = 0; //Control de importados
                         $skiped = 0; // control de repetidos
 

@@ -1,3 +1,20 @@
+4/08/2025 (1/2) hora
+* (TO_DO) Estoy con studiantes
+* Tema de matrículas (un estudiante varias matrículas que pueden o no estar activas)
+* Añado el campo year en enrollments y las relaciones en el modelo
+ 
+03/08/2025
+* Termino administración de profesores 
+* * Muy  interesante la presonalización de tipos de profesores por role tanto en listado como en acciones concretas
+* * (TO_DO) falta revisar la edición y la eliminiación 
+* * (TO_DO) Falta traducciones 
+* * (TO_DO) Revisar la seguridad si solo admin o todos los profesores realizar acciones de update y edit y delete 
+
+
+* Pendiente administración de usuarios alumnos y guest
+* 
+ 
+
 
 20/03/2025: 3 horas
 > Establemcer el flujo de ejecución de login

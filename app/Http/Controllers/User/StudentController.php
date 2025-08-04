@@ -16,14 +16,14 @@ class StudentController extends Controller
         return Inertia::render("Dashboard/Student/Index");
     }
 
-    public function show(Request $request, Student $student): Response
+    public function show(Request $request, User $student): Response
     {
         $student = Student::find($id);
     }
 
     public function update(StudentUpdateRequest $request, Student $student): Response
     {
-        $student = Student::find($id);
+        $user = User::find($id);
 
         $user->update($request->validated());
     }

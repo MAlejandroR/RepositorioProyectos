@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$title??'Admin'}}</title>
-    @vite(['resources/css/app.css','resources/css/app.css'])
+    @vite(['resources/js/app.js','resources/js/filament-chart-js-plugins.js','resources/css/app.css'])
     @filamentAssets
     @livewireStyles
 </head>

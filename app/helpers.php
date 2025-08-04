@@ -17,4 +17,9 @@ if (!function_exists('debugMiddlewareInertia')) {
             Log::info($mesage);
     }
 }
+if (!function_exists('normalize_string')){
+ function normalize_string(String $string): string{
+     return strtoupper(iconv("UTF-8", "ASCII//TRANSLIT", $string));
+ }
+}
 

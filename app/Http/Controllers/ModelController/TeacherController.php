@@ -7,13 +7,14 @@ use App\Http\Requests\TeacherUpdateRequest;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use const App\Http\Controllers\teacher;
+use App\Models\User;
 
 class TeacherController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
-        $teachers = Teacher::where('role=teacher', $role="teacher")->get();
+        $teachers = User::role("teacher")->get();
+
     }
 
     public function show(Request $request, Teacher $teacher): Response

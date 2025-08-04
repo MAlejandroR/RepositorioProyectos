@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Clusters\Usuarios;
+namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeacherResource\Pages;
 use App\Filament\Resources\TeacherResource\RelationManagers;
@@ -20,8 +20,9 @@ class TeacherResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     protected static ?int $navigationSort = 3;
-    protected static ?string $navigationParentItem = "Usuario";
-    protected static ?string $cluster = Usuarios::class;
+    protected static ?string $navigationGroup = 'Gestión de Datos';
+    protected static ?string $navigationParentItem = "Usuarios ▾";
+    protected static ?string $navigationLabel ="Teacher";
 
 
     public static function form(Form $form): Form
@@ -38,6 +39,15 @@ class TeacherResource extends Resource
                 Forms\Components\TextInput::make('email')->email()->required()->maxLength(255)->label("Email"),
                 Forms\Components\Select::make('specialization_id')
                     ->relationship('specialization', 'name')
+                    ->options(function(){
+                        $query = \App\Models\Specialization::query();
+
+                        if ($familyId = request('family_id')) {
+                            $query->where('family_id', $familyId);
+                        }
+
+                        return $query->pluck('name', 'id');
+                    })
                     ->label("Especialidad")
             ]);
     }
@@ -120,9 +130,5 @@ class TeacherResource extends Resource
     {
         return 'Teachers'; // plural label
     }
-    public static function getNavigationGroup(): string
-    {
-        return "Usuarios ";
 
-    }
 }

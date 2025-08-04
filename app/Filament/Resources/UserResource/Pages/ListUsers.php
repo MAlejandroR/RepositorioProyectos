@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Clusters\Usuarios\Resources\UserResource\Pages;
+namespace App\Filament\Resources\UserResource\Pages;
 
-use App\Filament\Clusters\Usuarios\UserResource;
+use App\Filament\Resources\UserResource;
 use App\Models\Specialization;
 use App\Models\User;
 use Filament\Actions;
@@ -11,6 +11,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
+
 
 
 class ListUsers extends ListRecords
@@ -163,6 +164,13 @@ class ListUsers extends ListRecords
 
                 }
                 ),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+//            CyclesChartStat::class,
+            UserResource\Widgets\DatosUsuarios::class
         ];
     }
 }

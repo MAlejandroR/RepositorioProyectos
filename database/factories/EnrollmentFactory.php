@@ -27,6 +27,7 @@ class EnrollmentFactory extends Factory
             'user_id' => User::factory(),
             'cycle_id' => Cycle::factory(),
             'user_cycle_id' => UserCycle::factory(),
+            "year" => $this->faker->year(),
         ];
     }
 }

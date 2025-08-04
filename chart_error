@@ -1,0 +1,335 @@
+app.js
+En este fichero entiendo que no tengo que hacer ninguna modicación, ya que la carga del plugin la hago en un fichero js independiente
+import './bootstrap';
+import '../css/app.css';
+
+import { createApp, h } from 'vue';
+import { createPinia } from 'pinia';
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import axios from 'axios'
+
+
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = '/'
+
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+    setup({ el, App, props, plugin }) {
+        return createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .use(ZiggyVue)
+            .use (createPinia())
+            .mount(el);
+    },
+    progress: {
+        color: '#4B5563',
+    },
+});
+//Instalo el plugin         "chartjs-plugin-datalabels": "^2.2.0",
+ que se puede ver en package.json:
+ {
+     "private": true,
+     "type": "module",
+     "scripts": {
+         "dev": "vite",
+         "build": "vite build"
+     },
+     "devDependencies": {
+         "@inertiajs/vue3": "^1.0.14",
+         "@tailwindcss/forms": "^0.5.10",
+         "@tailwindcss/typography": "^0.5.16",
+         "@vitejs/plugin-vue": "^5.0.0",
+         "autoprefixer": "^10.4.21",
+         "axios": "^1.6.4",
+         "chartjs-plugin-datalabels": "^2.2.0",
+         "daisyui": "^4.9.0",
+         "laravel-vite-plugin": "^1.0",
+         "postcss": "^8.5.3",
+         "postcss-nesting": "^13.0.1",
+         "tailwindcss": "^3.4.17",
+         "vite": "^5.0",
+         "vue": "^3.3.13"
+     },
+     "dependencies": {
+         "@inertiajs/inertia": "^0.11.1",
+         "@inertiajs/inertia-vue3": "^0.6.0",
+         "@vueuse/core": "^11.0.1",
+         "pinia": "^2.1.7"
+     }
+ }
+//Creo el fichero js para cargar y registrar el plugin (filament-chart-js-plugins.js):
+import Chart from 'chart.js/auto'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
+
+
+Chart.register(ChartDataLabels)
+
+window.Chart = Chart
+
+window.filamentChartJsPlugins ??= []
+window.filamentChartJsPlugins.push(ChartDataLabels)
+
+//realizo un npm run dev para establecer la relación del js en el fichero manifest.json cuando se cargue en producción (Esto no sé si está bien explicado)
+
+//En el fichero vite.config.js le digo que cargue este plugin
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
+                'resources/css/app.css',
+                'resources/css/filament/app.css',
+                'resources/js/app.js',
+                'resources/js/filament-chart-js-plugins.js', // Include the new file in the `input` array so it is built
+            ],
+            refresh: true
+        }),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
+        }),
+    ],
+});
+//Ahora en el provider registro el pluguin para que lo use filament, según indica la doc oficial:
+<?php
+
+namespace App\Providers;
+
+use App\Http\Responses\CustomRegisterResponse;
+use Illuminate\Support\ServiceProvider;
+use App\Http\Responses\CustomLoginResponse;
+use App\Http\Responses\LogoutResponse;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
+use Filament\Facades\Filament;
+use Laravel\Fortify\Contracts\RegisterResponse;
+use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Assets\Js;
+use Illuminate\Support\Facades\Vite;
+
+
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+        $this->app->singleton(LoginResponseContract::class, CustomLoginResponse::class);
+        $this->app->singleton(RegisterResponse::class, CustomRegisterResponse::class);
+        $this->app->singleton(LogoutResponseContract::class, LogoutResponse::class);
+
+		$this->app->bind(
+			\App\Interfaces\GoogleDriveServiceInterface::class,
+			\App\Services\GoogleDriveService::class
+		);
+
+		$this->app->bind(
+			\App\Interfaces\GoogleDriveServiceInterface::class,
+			\App\Services\GoogleDriveService::class
+		);
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        Filament::serving(function () {
+            app()->setLocale(session('locale', config('app.locale')));
+            // Cambia el nombre del panel actual
+            Filament::getCurrentPanel()->brandName(__('panel.project_repository'));
+            // Opción fácil:
+            FilamentAsset::register([
+                Js::make('chart-js-plugins', Vite::asset('resources/js/filament-chart-js-plugins.js'))
+                    ->module(),
+            ]);
+        });
+
+
+        //
+    }
+}
+
+//Por si acaso, no dice nada la doc oficial, pero previamente me lo has indicado, cargo también el plugin en el panel donde quiero que aparezca. Aquí dudo de la ruta, al hacer resource_path(... entiendo que no hay que especificar la ubicación resources...
+<?php
+
+namespace App\Providers\Filament;
+
+//use Filament\Actions\CreateAction;
+
+use App\Filament\Resources\CycleResource;
+use App\Filament\Resources\EnrollmentResource;
+use App\Filament\Resources\ProjectResource;
+use App\Filament\Resources\UserResource;
+use App\Filament\Widgets\ProjectStats;
+use App\Http\Middleware\ConditionalInertiaMiddleware;
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\AuthenticateSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Pages;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Support\Colors\Color;
+use Filament\Widgets;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Assets\Js;
+
+
+
+class AdminPanelProvider extends PanelProvider
+{
+
+    public function panel(Panel $panel): Panel
+    {
+
+        info(__CLASS__." con user -".auth()->user()."-");
+        return $panel
+//            ->viteTheme('resources/css/filament/app.css')
+            ->id('admin')
+            ->assets([
+                Js::make('custom-script', resource_path('js/filament-chart-js-plugins.js')),
+            ])
+            ->path('admin')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandName(__('panel.project_repository'))
+//            ->renderHook('panels::body.end', fn() =>view('components.filament.topbar-logo'))
+//            ->renderHook('panels::body.start', fn() =>view('components.filament.topmenu'))
+//            ->renderHook('panels::topbar.start', fn() => view('components.filament.topbar-logo'))
+            ->renderHook('panels::topbar.end', fn() => view('components.filament.LanguageSwitcher'))
+            ->colors([
+                'primary' => Color::Amber,
+            ])
+            ->discoverResources(
+                in: app_path('Filament/Resources'),
+                for: 'App\\Filament\\Resources'
+            )
+
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->pages([
+                Pages\Dashboard::class,
+//            \App\Filament\Pages\Dashboard::class,
+            ])
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->widgets([
+                Widgets\AccountWidget::class,
+                ProjectStats::class,
+                CycleResource\Widgets\CiclesCharPie::class,
+               // Widgets\FilamentInfoWidget::class,
+            ])
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+                \App\Http\Middleware\HandleLanguage::class, // <-- añade aquí también
+                ConditionalInertiaMiddleware::class,
+            ])
+            ->authMiddleware([Authenticate::class, \App\Http\Middleware\RestrictTeacherOnlyAdminProject::class]
+            );
+    }
+}
+Y luego quiero usar el plugin para personalizar el label con el método formmated, donde cargo el chart
+<?php
+
+namespace App\Filament\Resources\CycleResource\Widgets;
+
+use App\Models\Family;
+use Filament\Widgets\ChartWidget;
+
+class CiclesCharPie extends ChartWidget
+{
+    protected static ?string $heading = 'Ciclos por familia';
+
+    public function getHeading(): string
+    {
+        return __("Ciclos por familia");
+    }
+
+    protected function getType(): string
+    {
+        return 'bar'; // Horizontal bar chart
+    }
+
+    protected function getData(): array
+    {
+        $families = \App\Models\Family::withCount('cycles')
+            ->having('cycles_count', '>', 0)
+            ->get();
+
+        $labels = $families->pluck('name')->toArray();
+
+        $data = $families->pluck('cycles_count')->toArray();
+        $colors = $families->pluck('color')->toArray();
+
+        return [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => __('Ciclos por familia'),
+                    'data' => $data,
+                    'backgroundColor' => $colors,
+                    'borderColor' => $colors,
+                    'borderWidth' => 1,
+                    // 🔽 Opcional: más margen si los textos son grandes
+                    'barThickness' => 25,
+                ]
+            ],
+        ];
+
+    }
+
+    protected function getOptions(): ?array
+    {
+        return [
+            'indexAxis' => 'y', // barras horizontales
+            'plugins' => [
+                'legend' => ['display' => false],
+                'tooltip' => ['enabled' => true],
+                // ACTIVA datalabels:
+                'dataLabels' => [
+                    'enabled' => true,
+                    'anchor' => 'start',     // posición dentro de la barra
+                    'align' => 'start',      // alineado a la izquierda
+                    'color' => '#fff',       // color del texto
+                    'font' => [
+                        'weight' => 'bold',
+                        'size' => 14
+                    ],
+                    'formatter' => fn($value) => $value . ' ciclos',
+                ],
+            ],
+            'scales' => [
+                'x' => ['beginAtZero' => true, 'ticks' => ['precision' => 0]],
+            ]
+        ];
+    }
+
+
+}
+Y es aquí dónde no se ve el resultado, si comento el elemento del array "datalabels" sale lo mismo, y no se ve lo que ahí establezo

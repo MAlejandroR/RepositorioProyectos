@@ -15,9 +15,11 @@ return new class extends Migration
 
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('cycle_id')->constrained();
-            $table->foreignId('user_cycle_id');
+            $table->year('year'); //Año de la matriculoa. pe 2025 corresponde a una matrícula 2025-2026
+            //La matrícula estará activa si la fecha actual es de sep-2025 a julio-2026
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('cycle_id')->constrained()->cascadeOnDelete();
+            //$table->foreignId('user_cycle_id');
             $table->timestamps();
         });
 

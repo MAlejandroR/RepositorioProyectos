@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -22,16 +21,14 @@ return new class extends Migration
             $table->timestamp('otp_verified_at')->nullable();
             $table->string('password')->nullable(); //Cuando importo de csv no habrá
             //NExt el usuario deberá de aportar la primera vez
-            $table->string('departament')->nullable();
             $table->rememberToken();
-
 
             //Un profesor tiene una especialidad que implica un departamento
             //Profesor es un tipo de usuario por eso nullable
-            $table->foreignId("specialization_id")->constrained("specializations")->nullable();
-
-
-
+            $table->foreignId("specialization_id")
+                ->nullable()
+                ->constrained("specializations")
+                ->OnDelete("cascade");
 
 
             $table->foreignId('current_team_id')->nullable();

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
                 UserSeeder::class,
                 FamilySeeder::class,
                 CycleSeeder::class,
+                AlumnosSeeder::class,
             ]
         );
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -30,6 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at',
         'password',
         'departament',
+        "specialization_id"
     ];
 
     /**
@@ -48,8 +50,24 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
-            'email_verified_at' => 'timestamp',
-        ];
+        'email_verified_at' => 'timestamp',
+    ];
+
+    //La especialidad de un profesor
+
+
+    //Para obtener la especialización a la que pertenece un profesor
+    public function specialization(): BelongsTo
+    {
+        return $this->belongsTo(Specialization::class);
+    }
+
+    /*Un usuario se puede matricular en varios ciclos,
+     pero lo habitual es que esté matriculado solo en uno
+     * */
+    public function cycles(): HasMany{
+        return $this->hasMany(Enrollment::class);
+    }
 
 
 }

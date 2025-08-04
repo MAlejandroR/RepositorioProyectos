@@ -20,6 +20,7 @@ class Enrollment extends Model
         'user_id',
         'cycle_id',
         'user_cycle_id',
+        'year'
     ];
 
     /**
