@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\__Pages;
 
 use Filament\Pages\Page;
 
 class Estadisticas extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string $view = 'filament.pages.estadisticas';
+    protected string $view = 'filament.pages.estadisticas';
     protected static ?string $title= "Estadísticas";
 
 
