@@ -6,6 +6,8 @@ use App\Filament\Resources\TeacherResource\Pages;
 use App\Filament\Resources\TeacherResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Schemas\Schema;
+
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -18,16 +20,16 @@ class TeacherResource extends Resource
 
 
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static string | \BackedEnum | null $navigationIcon= 'heroicon-o-academic-cap';
     protected static ?int $navigationSort = 3;
-    protected static ?string $navigationGroup = 'Gestión de Datos';
+    protected static string| \UnitEnum | null $navigationGroup = 'Gestión de Datos';
     protected static ?string $navigationParentItem = "Usuarios ▾";
     protected static ?string $navigationLabel ="Teacher";
 
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()

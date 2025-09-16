@@ -6,9 +6,9 @@ use App\Models\Cycle;
 use Filament\Support\RawJs;
 use Filament\Widgets\ChartWidget;
 
-class StudentsWidgetPie extends ChartWidget
+class StudentsPieWidget extends ChartWidget
 {
-    protected static ?string $heading = 'Estudiantes por ciclo';
+    protected  ?string $heading = 'Estudiantes por ciclo';
 
     protected function getData(): array
     {
@@ -38,7 +38,7 @@ class StudentsWidgetPie extends ChartWidget
             'labels' => $labels,
             'datasets' => [
                 [
-                    'label' => 'Profesores',
+                    'label' => 'Estudiantes',
                     'data' => $values,
                     'backgroundColor' => $colors,
                     'borderColor' => $colors,

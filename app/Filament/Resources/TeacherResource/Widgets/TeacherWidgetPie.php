@@ -10,7 +10,7 @@ use Filament\Support\RawJs;
 class TeacherWidgetPie extends ChartWidget
 {
 
-    protected static ?string $heading = 'Profesores por ciclo formativo';
+    protected ?string $heading = 'Profesores por ciclo formativo';
     protected array $familyUrls = [];
 
     // Por ejemplo, que ocupe la mitad (6 columnas de 12)

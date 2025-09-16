@@ -12,12 +12,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Schemas\Schema;
 
 class EnrollmentResource extends Resource
 {
     protected static ?string $model = Enrollment::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
     public static  function getNavigationLabel(): string{
         return __("Matrículas");
     }
@@ -25,9 +26,9 @@ class EnrollmentResource extends Resource
     {
         return __('Gestión de Datos');
     }
-    public static function form(Form $form): Form
+    public static function form(Schema $form): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 //
             ]);

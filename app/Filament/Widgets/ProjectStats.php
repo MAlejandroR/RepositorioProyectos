@@ -12,7 +12,7 @@ use App\Models\User;
 
 class ProjectStats extends BaseWidget
 {
-    protected static ?string $pollingInterval = '2s';
+    protected  ?string $pollingInterval = '2s';
 
 
     protected function getStats(): array

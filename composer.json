@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.2",
         "algolia/algoliasearch-client-php": "^4.21",
-        "filament/filament": "^3.3",
+        "filament/filament": "^4.0",
         "google/apiclient": "^2.0",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/fortify": "^1.21",
@@ -24,6 +24,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
+        "filament/upgrade": "^4.0",
         "laravel-lang/common": "^6.2",
         "laravel-shift/blueprint": "^2.11",
         "laravel/pint": "^1.13",

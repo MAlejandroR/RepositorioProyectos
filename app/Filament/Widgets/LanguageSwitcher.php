@@ -8,7 +8,7 @@ use Filament\Widgets\Widget;
 
 class LanguageSwitcher extends Widget
 {
-    protected static string $view = 'filament.widgets.language-switcher';
+    protected string $view = 'filament.widgets.language-switcher';
     public static ?int $sort = -1; //Para que aparezca en el header ????
 
     protected int | string | array $columnSpan ='full';

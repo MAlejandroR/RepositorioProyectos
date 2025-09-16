@@ -9,8 +9,8 @@ use Filament\Widgets\ChartWidget;
 
 class CiclesCharPie extends ChartWidget
 {
-    protected static ?string $heading = 'Ciclos por familia';
-    protected static ?string $description = 'Ciclos formativos por familia profesional';
+//    protected ?string $heading = 'Ciclos por familia';
+//    protected static ?string $description = 'Ciclos formativos por familia profesional';
     protected static ?string $icon = 'heroicon-o-user-plus';
     /*
      *  Stat::make(__('Ciclos'), Cycle::count())

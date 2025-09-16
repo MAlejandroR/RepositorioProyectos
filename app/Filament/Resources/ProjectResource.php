@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Models\Project;
 use Filament\Forms;
+use Filament\Schemas\Schema;
+
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -22,10 +24,10 @@ class ProjectResource extends Resource
     protected static ?string $model = Project::class;
 
     //Icono para navegar
-    protected static ?string $navigationIcon = 'heroicon-o-link';
+    protected static string | \BackedEnum | null  $navigationIcon = 'heroicon-o-link';
 
-//    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-//    protected static ?string $navigationGroup = __('Gestión de Datos');
+//    protected static string | \BackedEnum | null  $navigationIcon = 'heroicon-o-document-text';
+//    protected static string| \UnitEnum | null $navigationGroup = __('Gestión de Datos');
 //    protected static ?string $modelLabel = __('Proyecto');
 //    protected static ?string $pluralModelLabel = __('Proyectos');
 
@@ -44,9 +46,9 @@ class ProjectResource extends Resource
         return __('Proyectos');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->schema([
             Forms\Components\TextInput::make('titulo')->required()->maxLength(255),
             Forms\Components\TextInput::make('autor')->required()->maxLength(255),
             Forms\Components\TextInput::make('correo_autor')->email()->required()->maxLength(255)

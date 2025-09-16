@@ -6,9 +6,9 @@ use Filament\Widgets\ChartWidget;
 
 class CyclesChartStat extends ChartWidget
 {
-    protected static ?string $heading = 'Listado de ciclos';
+//    protected ?string $heading = 'Listado de ciclos';
 
-    protected static string $view = 'filament.resources.cycle-resource.widgets.cycles-chart-stat';
+//    protected string $view = 'filament.resources.cycle-resource.widgets.cycles-chart-stat';
 
     protected int | string | array $columnSpan = 'full'; // or '1/2', adjust as needed
 
