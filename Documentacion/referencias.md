@@ -1,0 +1,1 @@
+## Referencias> Actualizar tailwind v3 a v4  https://laraveldaily.com/post/laravel-breeze-upgrade-tailwind-3-4-version 
