@@ -39,9 +39,9 @@ class TeacherController extends Controller
 
         return Inertia::render('Dashboard/Teacher/Index');
 
-        //Muy importante esta ruta es para acceder a parte de filament (solo a proyectos)
+        //Muy importante esta ruta es para acceder a parte de _filament (solo a proyectos)
         /*
-        return Inertia::location(route('filament.admin.resources.projects.index'));
+        return Inertia::location(route('_filament.admin.resources.projects.index'));
         */
 
 

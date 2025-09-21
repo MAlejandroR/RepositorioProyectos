@@ -30,7 +30,7 @@ class ListProjects extends ListRecords
                         ->acceptedFileTypes(['text/csv'])
                         ->multiple()
                         ->disk('public') // Guardamos en storage/app/public
-                        ->directory('/storage/filament') // Carpeta interna
+                        ->directory('/storage/_filament') // Carpeta interna
                         ->preserveFilenames(), // Para que el nombre sea predecible (opcional)
                 ])
                 ->action(function (array $data) {

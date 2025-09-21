@@ -3,8 +3,8 @@ https://filamentphp.com/docs/3.x
 
 * Instalación
 ```bash
- composer require filament/filament:"^3.3" -W
- php artisan filament:install --panels
+ composer require _filament/_filament:"^3.3" -W
+ php artisan _filament:install --panels
 ```
 > Necesario php-intl (Paquete de internacionalización). 
  
@@ -20,7 +20,7 @@ https://filamentphp.com/docs/3.x
  No necesario, puedo usar un usuario del sistema, en mi caso un usuario con rol de admin
  
 ```bash
-php artisan make:filament-user
+php artisan make:_filament-user
 ```
 
 * Visualizando datos

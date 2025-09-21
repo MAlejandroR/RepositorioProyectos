@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$title??'Admin'}}</title>
-    @vite(['resources/js/app.js','resources/js/filament-chart-js-plugins.js','resources/css/app.css'])
+    @vite(['resources/js/app.js','resources/js/_filament-chart-js-plugins.js','resources/css/app.css'])
     @filamentAssets
     @livewireStyles
 </head>
@@ -30,7 +30,7 @@
         <x-filament.LanguageSwitcher/>
 
         {{--        --}}{{-- User dropdown --}}
-        {{--        <x-filament::dropdown placement="bottom-end">--}}
+        {{--        <x-_filament::dropdown placement="bottom-end">--}}
         {{--            <x-slot name="trigger">--}}
         {{--                <button--}}
         {{--                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">--}}
@@ -39,11 +39,11 @@
         {{--                </button>--}}
         {{--            </x-slot>--}}
         {{--            {{ __('Profile') }}--}}
-        {{--            <x-filament::dropdown.list.item tag="form" :action="route('logout')" method="POST">--}}
+        {{--            <x-_filament::dropdown.list.item tag="form" :action="route('logout')" method="POST">--}}
         {{--                @csrf--}}
         {{--                <button type="submit">{{ __('Log Out') }}</button>--}}
-        {{--            </x-filament::dropdown.list.item>--}}
-        {{--        </x-filament::dropdown>--}}
+        {{--            </x-_filament::dropdown.list.item>--}}
+        {{--        </x-_filament::dropdown>--}}
     </div>
 </nav>
 

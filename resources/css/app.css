@@ -1,10 +1,51 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+/*@tailwind variants;*/
+@import "tailwindcss";
 
+/* ==============================================
+   Tailwind CSS v4 Custom Theme
+   ============================================== */
+@theme {
+    /* Colores */
+    --color-header: rgb(231, 117, 30);
+    --color-main: rgba(207, 201, 223, 1);
+    --color-start: rgb(231, 117, 30);
+    --color-end: #ffffff;
 
+    /* Tipografía */
+    --font-sans: "Figtree", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 
+    /* Max Width / Height */
+    --max-width-custom: 300px;
+    --max-height-custom: 200px;
+
+    /* Alturas personalizadas */
+    --h-2v: 2vh;
+    --h-3v: 3vh;
+    --h-4v: 4vh;
+    --h-5v: 5vh;
+    --h-10v: 10vh;
+    --h-11v: 11vh;
+    --h-12v: 12vh;
+    --h-13v: 13vh;
+    --h-14v: 14vh;
+    --h-15v: 15vh;
+    --h-20v: 20vh;
+    --h-25v: 25vh;
+    --h-30v: 30vh;
+
+    /* Anchos personalizados */
+    --w-72v: 72px;
+
+    /* Background images */
+    --bg-hero-pattern: url('/images/background_main.jpg');
+}
+
+/* Estilos globales */
 [x-cloak] {
     display: none;
 }
+
+/* Si quieres, puedes añadir más clases personalizadas aquí */

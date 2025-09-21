@@ -31,7 +31,7 @@ class ListUsers extends ListRecords
                         ->acceptedFileTypes(['text/csv'])
                         ->multiple()
                         ->disk('public') // Guardamos en storage/app/public
-                        ->directory('filament') // Carpeta interna
+                        ->directory('_filament') // Carpeta interna
                         ->preserveFilenames(), // Para que el nombre sea predecible (opcional)
                 ])
                 ->action(function (array $data) {

@@ -41,7 +41,7 @@ class TeacherWidgetPie extends ChartWidget
                 ->get()
                 ->sum('users_count');
             $values[] = $count;
-            $this->familyUrls[] = route('filament.admin.resources.teachers.index', ['family_id' => $family->id]);
+            $this->familyUrls[] = route('_filament.admin.resources.teachers.index', ['family_id' => $family->id]);
         }
 
         // Colors: get colors from family

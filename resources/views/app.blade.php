@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @routes
         @filamentStyles
-        @vite(['resources/js/app.js', 'resources/js/filament-chart-js-plugins.js',"resources/js/Pages/{$page['component']}.vue"])
+        @vite(['resources/js/app.js', 'resources/js/_filament-chart-js-plugins.js',"resources/js/Pages/{$page['component']}.vue"])
         @filamentScripts
         @inertiaHead
         {{--        Para evitar los page expired ????--}}

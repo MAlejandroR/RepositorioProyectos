@@ -8,16 +8,16 @@
 @php
     use Illuminate\Contracts\Pagination\CursorPaginator;
 
-    $isRtl = __('filament-panels::layouts.direction') === 'rtl';
+    $isRtl = __('filament-panels::layout.direction') === 'rtl';
     $isSimple = ! $paginator instanceof \Illuminate\Pagination\LengthAwarePaginator;
 @endphp
 
 <nav
-    aria-label="{{ __('filament::widgets/pagination.label') }}"
+    aria-label="{{ __('filament::components/pagination.label') }}"
     role="navigation"
     {{
         $attributes->class([
-            'fi-pagination grid grid-cols-[1fr_auto_1fr] items-center gap-x-3',
+            'fi-pagination',
             'fi-simple' => $isSimple,
         ])
     }}
@@ -36,19 +36,17 @@
             rel="prev"
             :wire:click="$wireClickAction"
             :wire:key="$this->getId() . '.pagination.previous'"
-            class="fi-pagination-previous-btn justify-self-start"
+            class="fi-pagination-previous-btn"
         >
-            {{ __('filament::widgets/pagination.actions.previous.label') }}
+            {{ __('filament::components/pagination.actions.previous.label') }}
         </x-filament::button>
     @endif
 
     @if (! $isSimple)
-        <span
-            class="fi-pagination-overview text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
+        <span class="fi-pagination-overview">
             {{
                 trans_choice(
-                    'filament::widgets/pagination.overview',
+                    'filament::components/pagination.overview',
                     $paginator->total(),
                     [
                         'first' => \Illuminate\Support\Number::format($paginator->firstItem() ?? 0),
@@ -61,7 +59,7 @@
     @endif
 
     @if (count($pageOptions) > 1)
-        <div class="col-start-2 justify-self-center">
+        <div class="fi-pagination-records-per-page-select-ctn">
             <label class="fi-pagination-records-per-page-select fi-compact">
                 <x-filament::input.wrapper>
                     <x-filament::input.select
@@ -69,27 +67,27 @@
                     >
                         @foreach ($pageOptions as $option)
                             <option value="{{ $option }}">
-                                {{ $option === 'all' ? __('filament::widgets/pagination.fields.records_per_page.options.all') : $option }}
+                                {{ $option === 'all' ? __('filament::components/pagination.fields.records_per_page.options.all') : $option }}
                             </option>
                         @endforeach
                     </x-filament::input.select>
                 </x-filament::input.wrapper>
 
-                <span class="sr-only">
-                    {{ __('filament::widgets/pagination.fields.records_per_page.label') }}
+                <span class="fi-sr-only">
+                    {{ __('filament::components/pagination.fields.records_per_page.label') }}
                 </span>
             </label>
 
             <label class="fi-pagination-records-per-page-select">
                 <x-filament::input.wrapper
-                    :prefix="__('filament::widgets/pagination.fields.records_per_page.label')"
+                    :prefix="__('filament::components/pagination.fields.records_per_page.label')"
                 >
                     <x-filament::input.select
                         :wire:model.live="$currentPageOptionProperty"
                     >
                         @foreach ($pageOptions as $option)
                             <option value="{{ $option }}">
-                                {{ $option === 'all' ? __('filament::widgets/pagination.fields.records_per_page.options.all') : $option }}
+                                {{ $option === 'all' ? __('filament::components/pagination.fields.records_per_page.options.all') : $option }}
                             </option>
                         @endforeach
                     </x-filament::input.select>
@@ -112,22 +110,24 @@
             rel="next"
             :wire:click="$wireClickAction"
             :wire:key="$this->getId() . '.pagination.next'"
-            class="fi-pagination-next-btn col-start-3 justify-self-end"
+            class="fi-pagination-next-btn"
         >
-            {{ __('filament::widgets/pagination.actions.next.label') }}
+            {{ __('filament::components/pagination.actions.next.label') }}
         </x-filament::button>
     @endif
 
     @if ((! $isSimple) && $paginator->hasPages())
-        <ol
-            class="fi-pagination-items justify-self-end rounded-lg bg-white shadow-sm ring-1 ring-gray-950/10 dark:bg-white/5 dark:ring-white/20"
-        >
+        <ol class="fi-pagination-items">
             @if (! $paginator->onFirstPage())
                 @if ($extremeLinks)
                     <x-filament::pagination.item
-                        :aria-label="__('filament::widgets/pagination.actions.first.label')"
-                        :icon="$isRtl ? 'heroicon-m-chevron-double-right' : 'heroicon-m-chevron-double-left'"
-                        :icon-alias="$isRtl ? 'pagination.first-button.rtl' : 'pagination.first-button'"
+                        :aria-label="__('filament::components/pagination.actions.first.label')"
+                        :icon="$isRtl ? \Filament\Support\Icons\Heroicon::ChevronDoubleRight : \Filament\Support\Icons\Heroicon::ChevronDoubleLeft"
+                        :icon-alias="
+                            $isRtl
+                            ? \Filament\Support\View\SupportIconAlias::PAGINATION_FIRST_BUTTON_RTL
+                            : \Filament\Support\View\SupportIconAlias::PAGINATION_FIRST_BUTTON
+                        "
                         rel="first"
                         :wire:click="'gotoPage(1, \'' . $paginator->getPageName() . '\')'"
                         :wire:key="$this->getId() . '.pagination.first'"
@@ -135,10 +135,17 @@
                 @endif
 
                 <x-filament::pagination.item
-                    :aria-label="__('filament::widgets/pagination.actions.previous.label')"
-                    :icon="$isRtl ? 'heroicon-m-chevron-right' : 'heroicon-m-chevron-left'"
-                    {{-- @deprecated Use `pagination.previous-button.rtl` instead of `pagination.previous-button` for RTL. --}}
-                    :icon-alias="$isRtl ? ['pagination.previous-button.rtl', 'pagination.previous-button'] : 'pagination.previous-button'"
+                    :aria-label="__('filament::components/pagination.actions.previous.label')"
+                    :icon="$isRtl ? \Filament\Support\Icons\Heroicon::ChevronRight : \Filament\Support\Icons\Heroicon::ChevronLeft"
+                    {{-- @deprecated Use `SupportIconAlias::PAGINATION_PREVIOUS_BUTTON_RTL` instead of `SupportIconAlias::PAGINATION_PREVIOUS_BUTTON` for RTL. --}}
+                    :icon-alias="
+                        $isRtl
+                        ? [
+                            \Filament\Support\View\SupportIconAlias::PAGINATION_PREVIOUS_BUTTON_RTL,
+                            \Filament\Support\View\SupportIconAlias::PAGINATION_PREVIOUS_BUTTON,
+                        ]
+                        : \Filament\Support\View\SupportIconAlias::PAGINATION_PREVIOUS_BUTTON
+                    "
                     rel="prev"
                     :wire:click="'previousPage(\'' . $paginator->getPageName() . '\')'"
                     :wire:key="$this->getId() . '.pagination.previous'"
@@ -154,7 +161,7 @@
                     @foreach ($element as $page => $url)
                         <x-filament::pagination.item
                             :active="$page === $paginator->currentPage()"
-                            :aria-label="trans_choice('filament::widgets/pagination.actions.go_to_page.label', $page, ['page' => $page])"
+                            :aria-label="trans_choice('filament::components/pagination.actions.go_to_page.label', $page, ['page' => $page])"
                             :label="$page"
                             :wire:click="'gotoPage(' . $page . ', \'' . $paginator->getPageName() . '\')'"
                             :wire:key="$this->getId() . '.pagination.' . $paginator->getPageName() . '.' . $page"
@@ -165,10 +172,17 @@
 
             @if ($paginator->hasMorePages())
                 <x-filament::pagination.item
-                    :aria-label="__('filament::widgets/pagination.actions.next.label')"
-                    :icon="$isRtl ? 'heroicon-m-chevron-left' : 'heroicon-m-chevron-right'"
-                    {{-- @deprecated Use `pagination.next-button.rtl` instead of `pagination.next-button` for RTL. --}}
-                    :icon-alias="$isRtl ? ['pagination.next-button.rtl', 'pagination.next-button'] : 'pagination.next-button'"
+                    :aria-label="__('filament::components/pagination.actions.next.label')"
+                    :icon="$isRtl ? \Filament\Support\Icons\Heroicon::ChevronLeft : \Filament\Support\Icons\Heroicon::ChevronRight"
+                    {{-- @deprecated Use `SupportIconAlias::PAGINATION_NEXT_BUTTON_RTL` instead of `SupportIconAlias::PAGINATION_NEXT_BUTTON` for RTL. --}}
+                    :icon-alias="
+                        $isRtl
+                        ? [
+                            \Filament\Support\View\SupportIconAlias::PAGINATION_NEXT_BUTTON_RTL,
+                            \Filament\Support\View\SupportIconAlias::PAGINATION_NEXT_BUTTON,
+                        ]
+                        : \Filament\Support\View\SupportIconAlias::PAGINATION_NEXT_BUTTON
+                    "
                     rel="next"
                     :wire:click="'nextPage(\'' . $paginator->getPageName() . '\')'"
                     :wire:key="$this->getId() . '.pagination.next'"
@@ -176,9 +190,13 @@
 
                 @if ($extremeLinks)
                     <x-filament::pagination.item
-                        :aria-label="__('filament::widgets/pagination.actions.last.label')"
-                        :icon="$isRtl ? 'heroicon-m-chevron-double-left' : 'heroicon-m-chevron-double-right'"
-                        :icon-alias="$isRtl ? 'pagination.last-button.rtl' : 'pagination.last-button'"
+                        :aria-label="__('filament::components/pagination.actions.last.label')"
+                        :icon="$isRtl ? \Filament\Support\Icons\Heroicon::ChevronDoubleLeft : \Filament\Support\Icons\Heroicon::ChevronDoubleRight"
+                        :icon-alias="
+                            $isRtl
+                            ? \Filament\Support\View\SupportIconAlias::PAGINATION_LAST_BUTTON_RTL
+                            : \Filament\Support\View\SupportIconAlias::PAGINATION_LAST_BUTTON
+                        "
                         rel="last"
                         :wire:click="'gotoPage(' . $paginator->lastPage() . ', \'' . $paginator->getPageName() . '\')'"
                         :wire:key="$this->getId() . '.pagination.last'"

@@ -33,17 +33,17 @@ class AdminPanelProvider extends PanelProvider
 
         info(__CLASS__." con user -".auth()->user()."-");
         return $panel
-//            ->viteTheme('resources/css/filament/app.css')
+//            ->viteTheme('resources/css/_filament/app.css')
             ->id('admin')
 //            ->assets([
-//                Js::make('custom-script', resource_path('js/filament-chart-js-plugins.js')),
+//                Js::make('custom-script', resource_path('js/_filament-chart-js-plugins.js')),
 //            ])
             ->path('admin')
             ->brandLogo(asset('images/logo.png'))
             ->brandName(__('panel.project_repository'))
-//            ->renderHook('panels::body.end', fn() =>view('components.filament.topbar-logo'))
-//            ->renderHook('panels::body.start', fn() =>view('components.filament.topmenu'))
-//            ->renderHook('panels::topbar.start', fn() => view('components.filament.topbar-logo'))
+//            ->renderHook('panels::body.end', fn() =>view('components._filament.topbar-logo'))
+//            ->renderHook('panels::body.start', fn() =>view('components._filament.topmenu'))
+//            ->renderHook('panels::topbar.start', fn() => view('components._filament.topbar-logo'))
             ->renderHook('panels::topbar.end', fn() => view('components.filament.LanguageSwitcher'))
 
             ->colors([

@@ -15,7 +15,7 @@ class LanguageControllerFilament extends Controller
         info("LanguageControllerFilament@invoke  modifing locale to: $locale");
         session()->put('locale', $locale);
         //dd ($locale);
-        //guardar en cookies, ya que cuando se cierra el panel de filament se destruye
+        //guardar en cookies, ya que cuando se cierra el panel de _filament se destruye
         // todas las sesiones ????? y para poder recuperar luego el idioma seleccionado.
 
         cookie()->queue(cookie('locale', $locale, 525600, null, null, false, false, false, 'strict'));

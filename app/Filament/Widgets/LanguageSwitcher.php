@@ -17,7 +17,7 @@ class LanguageSwitcher extends Widget
     public function setLocale($locale){
         session()->put("locale", $locale);
         App::setLocale($locale);
-        return redirect(request()->header('Referer')??route('filament.pages.dashboard'))->back();
+        return redirect(request()->header('Referer')??route('_filament.pages.dashboard'))->back();
     }
 
     protected function getLanguage(): array

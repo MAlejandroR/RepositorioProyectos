@@ -2,10 +2,8 @@
 
 Aplicación de centro enfocada a gestionar la información de los proyectos de los diferentes ciclos.
 
-Objetivos:
- * Tener un listado de proyectos
- * Ver o acceder a los mismos
- * Poder buscar proyectos según información de criterios previamente establecidos
+Requisitos:
+![Requisitos y objetivos](./Documentacion/requisitos.png)
 
 Un fichero de requisitos está en (./documenacion/requisitos.docs)
 

@@ -6,8 +6,6 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use App\Models\User;
 use Filament\Support\Enums\IconPosition;
-
-
 class DatosUsuarios extends BaseWidget
 {
     protected function getStats(): array
@@ -32,7 +30,7 @@ class DatosUsuarios extends BaseWidget
             ->icon('heroicon-s-user-plus')
             ->description("Alumnos del centro")
                 ->descriptionIcon('heroicon-m-building-library', IconPosition::Before)
-                ->url(route('filament.admin.resources.students.index'))
+                ->url(route('_filament.admin.resources.students.index'))
                 ->color('primary')
                 ->extraAttributes([
                     'class' => 'cursor-pointer hover:bg-red-500/80 transition-colors',
@@ -43,7 +41,7 @@ class DatosUsuarios extends BaseWidget
                 ->icon("heroicon-o-academic-cap")
                 ->description('Profesores en el centro')
                 ->descriptionIcon('heroicon-m-building-library', IconPosition::Before)
-                ->url(route('filament.admin.resources.teachers.index'))
+                ->url(route('_filament.admin.resources.teachers.index'))
                 ->color('success')
                 ->extraAttributes([
                     'class' => 'cursor-pointer hover:bg-red-500/80 transition-colors',

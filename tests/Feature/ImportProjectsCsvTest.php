@@ -57,7 +57,7 @@ it("Si subo un fichero con un nombre, se guarda en la carpeta", function(){
         ->callAction('importCsv', data: ['file' => $file]);
 
     // Verificar que se guardó el archivo
-    Storage::disk('public')->assertExists('filament/' . $file->hashName());
+    Storage::disk('public')->assertExists('_filament/' . $file->hashName());
 
 });
 //it("Allows admin to import CSV file and cretes  projets", function(){

@@ -1,4 +1,4 @@
-// tailwind.config.js
+// tailwind.config.js_old_last
 import defaultTheme from "tailwindcss/defaultTheme"
 import forms from "@tailwindcss/forms"
 import typography from "@tailwindcss/typography"

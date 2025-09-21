@@ -17,7 +17,7 @@ class CiclesCharPie extends ChartWidget
                     ->description(__('Ciclos formativos'))
                     ->color('success')
                     ->icon('heroicon-o-user-plus')
-                    ->url(route('filament.admin.resources.users.index'))  // ⬅️ Aquí el enlace
+                    ->url(route('_filament.admin.resources.users.index'))  // ⬅️ Aquí el enlace
                     ->extraAttributes(['class' => 'cursor-pointer']),
      * */
     public function getHeading(): string
