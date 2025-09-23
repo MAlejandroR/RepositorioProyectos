@@ -64,14 +64,14 @@ class ListTeachers extends ListRecords
     {
         $actions[]=Actions\CreateAction::make("back")
             ->label("Volver")
-            ->url(route("_filament.admin.resources.users.index"));
+            ->url(route("filament.admin.resources.users.index"));
 
         if ($family_id=request('family_id')) {
             $actions[] = Action::make('back')
                 ->label(__('Volver a todos los profesores'))
-                ->url(route('_filament.admin.resources.teachers.index'));
+                ->url(route('filament.admin.resources.teachers.index'));
             $actions[] = Actions\CreateAction::make()
-                ->url(route('_filament.admin.resources.teachers.create',['family_id'=>$family_id]));
+                ->url(route('filament.admin.resources.teachers.create',['family_id'=>$family_id]));
         }else
             $actions[]=    Actions\CreateAction::make();//,parent::getHeaderActions();
 

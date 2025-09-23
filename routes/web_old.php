@@ -55,7 +55,7 @@ Route::get('/dashboard', function () {
 Route::get("set_lang", \App\Http\Controllers\LanguageController::class);
 
 
-//Todo teacher como admin no tendría que tener inertia, ya que accede a _filament ??????
+//Todo teacher como admin no tendría que tener inertia, ya que accede a filament ??????
 
 Route::middleware(['auth', 'verified','inertia'])->group(function () {
     Route::get('/teacher', [TeacherController::class, 'index'])->name('teacher.dashboard');

@@ -8,7 +8,7 @@ class CyclesChartStat extends ChartWidget
 {
 //    protected ?string $heading = 'Listado de ciclos';
 
-//    protected string $view = '_filament.resources.cycle-resource.widgets.cycles-chart-stat';
+//    protected string $view = 'filament.resources.cycle-resource.widgets.cycles-chart-stat';
 
     protected int | string | array $columnSpan = 'full'; // or '1/2', adjust as needed
 

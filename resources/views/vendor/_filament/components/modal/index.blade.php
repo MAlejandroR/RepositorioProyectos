@@ -241,7 +241,7 @@
                                         icon="heroicon-o-x-mark"
                                         icon-alias="modal.close-button"
                                         icon-size="lg"
-                                        :label="__('_filament::widgets/modal.actions.close.label')"
+                                        :label="__('filament::widgets/modal.actions.close.label')"
                                         tabindex="-1"
                                         :x-on:click="$closeEventHandler"
                                         class="fi-modal-close-btn"

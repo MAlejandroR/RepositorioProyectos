@@ -134,7 +134,7 @@
                         new \Illuminate\View\ComponentAttributeBag([
                             'alias' => $iconAlias,
                             'icon' => $icon,
-                            'wire:loading.remove.delay.' . config('_filament.livewire_loading_delay', 'default') => $hasLoadingIndicator,
+                            'wire:loading.remove.delay.' . config('filament.livewire_loading_delay', 'default') => $hasLoadingIndicator,
                             'wire:target' => $hasLoadingIndicator ? $loadingIndicatorTarget : null,
                         ])
                     )
@@ -149,7 +149,7 @@
                 :attributes="
                     \Filament\Support\prepare_inherited_attributes(
                         new \Illuminate\View\ComponentAttributeBag([
-                            'wire:loading.delay.' . config('_filament.livewire_loading_delay', 'default') => '',
+                            'wire:loading.delay.' . config('filament.livewire_loading_delay', 'default') => '',
                             'wire:target' => $loadingIndicatorTarget,
                         ])
                     )
@@ -209,7 +209,7 @@
                         new \Illuminate\View\ComponentAttributeBag([
                             'alias' => $iconAlias,
                             'icon' => $icon,
-                            'wire:loading.remove.delay.' . config('_filament.livewire_loading_delay', 'default') => $hasLoadingIndicator,
+                            'wire:loading.remove.delay.' . config('filament.livewire_loading_delay', 'default') => $hasLoadingIndicator,
                             'wire:target' => $hasLoadingIndicator ? $loadingIndicatorTarget : null,
                         ])
                     )
@@ -224,7 +224,7 @@
                 :attributes="
                     \Filament\Support\prepare_inherited_attributes(
                         new \Illuminate\View\ComponentAttributeBag([
-                            'wire:loading.delay.' . config('_filament.livewire_loading_delay', 'default') => '',
+                            'wire:loading.delay.' . config('filament.livewire_loading_delay', 'default') => '',
                             'wire:target' => $loadingIndicatorTarget,
                         ])
                     )

@@ -22,32 +22,32 @@ class ProjectStats extends BaseWidget
                 ->description(__('Ciclos formativos'))
                 ->color('success')
                 ->icon('heroicon-o-user-plus')
-                ->url(route('_filament.admin.resources.cycles.index'))  // ⬅️ Aquí el enlace
+                ->url(route('filament.admin.resources.cycles.index'))  // ⬅️ Aquí el enlace
                 ->extraAttributes(['class' => 'cursor-pointer']),
             Stat::make(__('Proyectos'), Project::count())
                 ->description(__('Total de proyectos registrados'))
                 ->color('primary')
                 ->icon('heroicon-o-folder')
                 ->chart(["inform"=>7, "Comercio"=>2, 10, 3, 15, 4, 100])
-                ->url(route('_filament.admin.resources.projects.index'))  // ⬅️ Aquí el enlace
+                ->url(route('filament.admin.resources.projects.index'))  // ⬅️ Aquí el enlace
                 ->extraAttributes(['class' => 'cursor-pointer']),
             Stat::make(__('Profesores'), User::role("teacher")->count())
                 ->description(__('Profesores en la plataforma'))
                 ->color('primary')
                 ->icon('heroicon-o-academic-cap')
-                ->url(route('_filament.admin.resources.users.index'))  // ⬅️ Aquí el enlace
+                ->url(route('filament.admin.resources.users.index'))  // ⬅️ Aquí el enlace
                 ->extraAttributes(['class' => 'cursor-pointer']),
             Stat::make(__('Matrículas'), Enrollment::count())
                 ->description(__('Matrículas activas'))
                 ->color('primary')
                 ->icon('heroicon-o-book-open')
-                ->url(route('_filament.admin.resources.enrollments.index'))  // ⬅️ Aquí el enlace
+                ->url(route('filament.admin.resources.enrollments.index'))  // ⬅️ Aquí el enlace
                 ->extraAttributes(['class' => 'cursor-pointer']),
             Stat::make(__('Alumnos'), User::role("student")->count())
                 ->description(__('Alumnos totales'))
                 ->color('primary')
                 ->icon('heroicon-o-user-plus')
-                ->url(route('_filament.admin.resources.users.index'))  // ⬅️ Aquí el enlace
+                ->url(route('filament.admin.resources.users.index'))  // ⬅️ Aquí el enlace
                 ->extraAttributes(['class' => 'cursor-pointer']),
 
 

@@ -44,7 +44,7 @@ Route::get("/", function(){
 
 
 
-//Todo teacher como admin no tendría que tener inertia, ya que accede a _filament ??????
+//Todo teacher como admin no tendría que tener inertia, ya que accede a filament ??????
 
 Route::middleware(['auth', 'verified','inertia'])->group(function () {
     Route::get('/teacher', [TeacherController::class, 'index'])->name('teacher.dashboard');

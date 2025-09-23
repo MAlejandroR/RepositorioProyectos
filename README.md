@@ -2,8 +2,9 @@
 
 Aplicación de centro enfocada a gestionar la información de los proyectos de los diferentes ciclos.
 
-Requisitos:
-![Requisitos y objetivos](./Documentacion/requisitos.png)
+**Requisitos:**
+
+> [Requisitos y objetivos](./Documentacion/requisitos.md)
 
 Un fichero de requisitos está en (./documenacion/requisitos.docs)
 

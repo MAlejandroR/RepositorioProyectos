@@ -52,8 +52,8 @@ class AppServiceProvider extends ServiceProvider
             Filament::getCurrentPanel()->brandName(__('panel.project_repository'));
             // Opción fácil:
             FilamentAsset::register([
-//                Js::make('chart-js-plugins', Vite::asset('resources/js/_filament-chart-js-plugins.js'))->module(),
-                Js::make('chart-js-plugins', Vite::asset('resources/js/_filament-chart-js-plugins.js'))->module()
+//                Js::make('chart-js-plugins', Vite::asset('resources/js/filament-chart-js-plugins.js'))->module(),
+                Js::make('chart-js-plugins', Vite::asset('resources/js/filament-chart-js-plugins.js'))->module()
             ]);
         });
 

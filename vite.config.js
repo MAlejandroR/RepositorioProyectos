@@ -10,9 +10,9 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/css/_filament/app.css',
+                'resources/css/filament/app.css',
                 'resources/js/app.js',
-                 'resources/js/_filament-chart-js-plugins.js', // Include the new file in the `input` array so it is built
+                 'resources/js/filament-chart-js-plugins.js', // Include the new file in the `input` array so it is built
             ],
             refresh:
                 true

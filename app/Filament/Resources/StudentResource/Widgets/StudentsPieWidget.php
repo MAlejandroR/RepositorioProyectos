@@ -30,7 +30,7 @@ class StudentsPieWidget extends ChartWidget
             $labels[] = $cycle->name;
             $values[] = $studentCount;
             $colors[] = $cycle->family?->color ?? '#cccccc';
-//            $this->cycleUrls[] = route('_filament.admin.resources.teachers.index', ['family_id' => $family->id]);
+//            $this->cycleUrls[] = route('filament.admin.resources.teachers.index', ['family_id' => $family->id]);
 
         }
 

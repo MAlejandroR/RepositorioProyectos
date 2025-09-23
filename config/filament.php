@@ -51,7 +51,7 @@ return [
     | This is the directory where Filament's assets will be published to. It
     | is relative to the `public` directory of your Laravel application.
     |
-    | After changing the path, you should run `php artisan _filament:assets`.
+    | After changing the path, you should run `php artisan filament:assets`.
     |
     */
 
@@ -65,11 +65,11 @@ return [
     | This is the directory that Filament will use to store cache files that
     | are used to optimize the registration of components.
     |
-    | After changing the path, you should run `php artisan _filament:cache-components`.
+    | After changing the path, you should run `php artisan filament:cache-components`.
     |
     */
 
-    'cache_path' => base_path('bootstrap/cache/_filament'),
+    'cache_path' => base_path('bootstrap/cache/filament'),
 
     /*
     |--------------------------------------------------------------------------
@@ -96,6 +96,6 @@ return [
     |
     */
 
-    'system_route_prefix' => '_filament',
+    'system_route_prefix' => 'filament',
 
 ];

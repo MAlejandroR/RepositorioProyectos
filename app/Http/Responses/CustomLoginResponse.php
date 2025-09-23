@@ -40,7 +40,7 @@ class CustomLoginResponse implements LoginResponse
             'teacher' => Inertia::location('teacher'),
 //            'teacher' => Inertia::location("/login-sucess?password_set=" . ($user->password ? 1 : 0)),
 //            Esta RUTA ES PARA IR DIRECTAMENTE A FILAMENT
-            //'teacher' => Inertia::location(route('_filament.admin.resources.projects.index')),
+            //'teacher' => Inertia::location(route('filament.admin.resources.projects.index')),
             default => redirect('/'),
         };
     }
