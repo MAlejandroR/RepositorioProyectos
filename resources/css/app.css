@@ -21,6 +21,9 @@
     --max-width-custom: 300px;
     --max-height-custom: 200px;
 
+    /* Background images */
+    --background-image-hero-pattern: url('/images/background_main.jpg');
+
     /* Alturas personalizadas */
     --h-2v: 2vh;
     --h-3v: 3vh;
@@ -39,8 +42,7 @@
     /* Anchos personalizados */
     --w-72v: 72px;
 
-    /* Background images */
-    --bg-hero-pattern: url('/images/background_main.jpg');
+
 }
 
 /* Estilos globales */

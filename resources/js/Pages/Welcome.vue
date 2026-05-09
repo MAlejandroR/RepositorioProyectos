@@ -1,22 +1,22 @@
 <script setup>
-import { Head, usePage } from '@inertiajs/vue3';
+import {Head, usePage} from '@inertiajs/vue3';
 import Login from "@/Pages/Auth/Login.vue";
-import { defineProps, onMounted } from "vue";
+import {defineProps, onMounted} from "vue";
 import DropDownLang from "@/Components/DropDown-lang.vue";
 import Register from "@/Pages/Auth/Register.vue";
-import { ref } from "vue";
-import { __ } from "@/Hooks/useTranslation.js";
+import {ref} from "vue";
+import {__} from "@/Hooks/useTranslation.js";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Banner from "@/Components/Banner.vue";
-import { useTranslationStore } from '@/stores/translationsStore'; // 👈 Correcto
+import {useTranslationStore} from '@/stores/translationsStore'; // 👈 Correcto
 
 
 const showModal = ref(false);
 
-const {translate, list_of_lang, lang}=usePage().props;
+const {translate, list_of_lang, lang} = usePage().props;
 
 const datos = defineProps({
-    departaments: Array
+        departaments: Array
     }
 );
 
@@ -24,8 +24,8 @@ const datos = defineProps({
 // console.log("sessiones " + usePage().flash);
 // console.log("Departamentos  " + datos.departaments);
 // console.log("Listado de lenguajes ");
- console.log( "datos");
- console.log( datos);
+console.log("datos");
+console.log(datos);
 // console.log(`Wellcome.vue l-17 showmodal ${showModal.value}`);
 // console.log(datos.translate);
 
@@ -35,7 +35,7 @@ const translationStore = useTranslationStore(); // 👈 Muy importante, crear la
 onMounted(() => {
     if (translate) {
         console.log("Actualizando store de traducciones");
-         translationStore.updateTranslations(translate);
+        translationStore.updateTranslations(translate);
     } else {
         console.log("datos.translate está vacío o undefined");
     }
@@ -53,9 +53,9 @@ function updateShowModal(newValue) {
 </script>
 
 <template>
-    <Register :departaments="departaments" :visible="showModal" @update:visible="showModal = $event" />
+    <Register :departaments="departaments" :visible="showModal" @update:visible="showModal = $event"/>
     <Head title="Proyectos"/>
-    <Banner />
+    <!--    <Banner />-->
 
     <div class="flex flex-col sm:flex-row h-screen w-screen">
         <div class="w-full sm:w-2/3 flex justify-center items-center p-10 rounded-2xl
@@ -68,14 +68,17 @@ function updateShowModal(newValue) {
             </div>
         </div>
         <div class="w-full sm:w-1/3 h-1/2 sm:h-screen flex flex-col justify-start
-         items-center bg-gray-100 rounded-3xl p-5">
-            <div class="self-stretch flex justify-between">
-                <img class="w-1/2" src="/images/logo.png" alt="logo Enlaces">
-                <DropDownLang :list_of_lang="list_of_lang" :lang="lang" />
-            </div>
+         items-center bg-gray-100">
+            <div class="self-stretch flex justify-between items-center">
+                <a href="https://cpilosenlaces.com" class="hover:bg-gray-200 w-1/2 h-auto object-contain p-2">
+                    <img
+                        src="/images/logo.png" alt="logo Enlaces">
+                </a>
+                <DropDownLang :list_of_lang="list_of_lang" :lang="lang" class="w-1/6"/>
 
+            </div>
             <div class="flex justify-center items-center h-full">
-                <div class="shadow-2xl w-full bg-white p-5 sm:p-10 rounded-lg">
+                <div class="shadow-2xl w-full bg-white p-5 sm:p-10 rounded-lg ">
                     <Login :showModal="showModal" @update:showModal="updateShowModal"/>
                 </div>
             </div>

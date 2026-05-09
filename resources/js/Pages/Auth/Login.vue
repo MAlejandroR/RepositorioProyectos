@@ -61,7 +61,7 @@ const submit = () => {
 <template>
     <form @submit.prevent="submit">
         <div class="form-control mt-4">
-            <InputLabel class="text-3xl ">
+            <InputLabel class="text-xl ">
                 <span class="label-text">  {{ __('Email') }}</span>
             </InputLabel>
             <TextInput type="email" placeholder="email" name="email"
@@ -84,16 +84,26 @@ const submit = () => {
             </InputLabel>
             <InputError class="mt-2" :message="form.errors.password" />
         </div>
-
+<div class="flex flex-row justify-around">
         <div class="form-control mt-6">
             <PrimaryButton class="btn btn-primary">{{ __("Login") }}</PrimaryButton>
         </div>
+        <div class="form-control mt-6">
+            <PrimaryButton @click="register" class="btn btn-primary">{{ __("Register") }}</PrimaryButton>
+        </div>
+</div>
     </form>
-    <div class="form-control mt-6">
-        <PrimaryButton @click="register" class="btn btn-primary">{{ __("Register") }}</PrimaryButton>
+    <div class="my-6 flex items-center">
+        <div class="h-px flex-1 bg-gray-300"></div>
+
+        <span class="px-4 text-sm text-gray-500">
+{{__("Or continue with")}}    </span>
+
+        <div class="h-px flex-1 bg-gray-300"></div>
     </div>
 
-    <div class="divider">{{__("Or continue with")}}</div>
+
+
 
     <div class="grid grid-cols-2 gap-4">
         <a href="/auth/google" class="btn btn-outline flex items-center justify-center">
