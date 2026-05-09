@@ -1,0 +1,5 @@
+/**
+ * Tema Vite para el panel Filament (Filament v5 + Tailwind v4).
+ * @see https://filamentphp.com/docs/panels/themes
+ */
+@import '../../../vendor/filament/filament/resources/css/theme.css';

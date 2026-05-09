@@ -5,7 +5,6 @@ import {useTranslationStore} from "@/stores/translationsStore.js";
 
 import {useTitleStore} from "@/stores/titleStore.js";
 
-import {Inertia} from '@inertiajs/inertia';
 // import {usePage} from '@inertiajs/inertia-vue3'
 
 

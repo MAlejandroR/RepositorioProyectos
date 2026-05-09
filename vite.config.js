@@ -5,6 +5,12 @@ import tailwindcss from "@tailwindcss/vite";
 
 
 export default defineConfig({
+    server: {
+        watch: {
+            // Evita ENOSPC al no vigilar miles de archivos en vendor (p. ej. google/apiclient-services).
+            ignored: ['**/vendor/**', '**/node_modules/**', '**/storage/**'],
+        },
+    },
     plugins: [
         tailwindcss(),
         laravel({
